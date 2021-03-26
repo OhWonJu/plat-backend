@@ -6,8 +6,8 @@ import { makeExecutableSchema } from "@graphql-tools/schema";
 //모든폴더/
 const loadedTypes = loadFilesSync(`${__dirname}/**/*.typeDefs.js`);
 const loadedResolvers = loadFilesSync(
-  `${__dirname}/**/*.{queries,mutations}.js`
-); // ,뛰어쓰기 하면 오류.
+  `${__dirname}/**/*.resolvers.js`
+);
 
 const typeDefs = mergeTypeDefs(loadedTypes);
 const resolvers = mergeResolvers(loadedResolvers);
