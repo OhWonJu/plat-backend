@@ -1,4 +1,4 @@
-import { gql } from "apollo-server";
+import { gql } from "apollo-server-express";
 
 export default gql`
   type User {
@@ -7,8 +7,11 @@ export default gql`
     lastName: String
     userName: String!
     email: String!
-    # password: String! grqphql에서는 password를 묻지 않을 것임.A
+    # password: String! grqphql에서는 password를 묻지 않을 것임.
+    loginSecret: String
     bio: String
+    profilePhoto: String
+    point: Int
     createdAt: String!
     updatedAt: String!
   }

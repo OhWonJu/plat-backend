@@ -1,43 +1,61 @@
+import { createWriteStream } from "fs"; // nodejs 라이브러리 파일 pip관련
 import bcrypt from "bcrypt";
 
 import client from "../../client";
 import { portectedResolver } from "../users.utils";
 
+const resolver = async (
+  _,
+  {
+    firstName,
+    lastName,
+    userName,
+    email,
+    password: newPassword,
+    bio,
+    profilePhoto,
+  },
+  { loggedInUser }
+) => {
+  const { filename, createReadStream } = await profilePhoto;
+  const readStream = createReadStream();
+  const writeStream = createWriteStream(process.cwd() + "/uploads/" +  filename);
+  // stream 간의 pipe 연결
+  // readStram에 writeStream을 연결 
+  // read한 file을 write
+  readStream.pipe(writeStream); 
+  // 실무 형식에서는 aws를 사용할 예정
+  let uglyPassword = null;
+  if (newPassword) {
+    uglyPassword = await bcrypt.hash(newPassword, 10);
+  }
+  const updatedUser = await client.user.update({
+    where: {
+      id: loggedInUser.id,
+    },
+    data: {
+      firstName,
+      lastName,
+      userName,
+      email,
+      bio,
+      ...(uglyPassword && { password: uglyPassword }), // ES6 문법.  ...(조건 && return Obj)
+    },
+  });
+  if (updatedUser.id) {
+    return {
+      ok: true,
+    };
+  } else {
+    return {
+      ok: false,
+      error: "Could not update profile.",
+    };
+  }
+};
+
 export default {
   Mutation: {
-    editProfile: portectedResolver( // x(~)
-      async (
-        _,
-        { firstName, lastName, userName, email, password: newPassword },
-        { loggedInUser }
-      ) => {
-        let uglyPassword = null;
-        if (newPassword) {
-          uglyPassword = await bcrypt.hash(newPassword, 10);
-        }
-        const updatedUser = await client.user.update({
-          where: {
-            id: loggedInUser.id,
-          },
-          data: {
-            firstName,
-            lastName,
-            userName,
-            email,
-            ...(uglyPassword && { password: uglyPassword }), // ES6 문법.  ...(조건 && return Obj)
-          },
-        });
-        if (updatedUser.id) {
-          return {
-            ok: true,
-          };
-        } else {
-          return {
-            ok: false,
-            error: "Could not update profile.",
-          };
-        }
-      }
-    ),
+    editProfile: portectedResolver(resolver),
   },
 };

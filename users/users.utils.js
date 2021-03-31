@@ -32,12 +32,12 @@ export const getUser = async token => {
 //   }
 // }
 
-export const portectedResolver = resolver => (root, args, context, info) => {
+export const portectedResolver = gqlResolver => (root, args, context, info) => {
   if (!context.loggedInUser) {
     return {
       ok: false,
       error: "Pleas log in to perform this action.",
     };
   }
-  return resolver(root, args, context, info);
+  return gqlResolver(root, args, context, info);
 };

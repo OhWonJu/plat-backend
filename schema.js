@@ -1,7 +1,7 @@
 // The GraphQL schema
 import { loadFilesSync } from "@graphql-tools/load-files";
 import { mergeResolvers, mergeTypeDefs } from "@graphql-tools/merge";
-import { makeExecutableSchema } from "@graphql-tools/schema";
+//import { makeExecutableSchema } from "@graphql-tools/schema";
 
 //모든폴더/
 const loadedTypes = loadFilesSync(`${__dirname}/**/*.typeDefs.js`);
@@ -9,9 +9,10 @@ const loadedResolvers = loadFilesSync(
   `${__dirname}/**/*.resolvers.js`
 );
 
-const typeDefs = mergeTypeDefs(loadedTypes);
-const resolvers = mergeResolvers(loadedResolvers);
+// apollo server에서 schema를 생성하도록 export
+export const typeDefs = mergeTypeDefs(loadedTypes);
+export const resolvers = mergeResolvers(loadedResolvers);
 
-const schema = makeExecutableSchema({ typeDefs, resolvers });
+//export const schema = makeExecutableSchema({ typeDefs, resolvers });
 
-export default schema;
+// export default schema;
