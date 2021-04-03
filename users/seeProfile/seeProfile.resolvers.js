@@ -7,6 +7,11 @@ export default {
         where: {
           userName,
         },
+        include: {
+          // relationship에 대한 접근을 풀어준다.
+          followings: true,
+          followers: true,
+        },
       }),
   },
 };

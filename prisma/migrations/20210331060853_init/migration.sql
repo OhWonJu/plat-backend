@@ -1,12 +1,17 @@
 -- CreateTable
 CREATE TABLE "User" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "firstName" TEXT NOT NULL,
     "lastName" TEXT,
     "userName" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "loginSecret" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "loginSecret" TEXT,
     "bio" TEXT,
+    "profilePhoto" TEXT,
+    "point" INTEGER NOT NULL DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     PRIMARY KEY ("id")
 );

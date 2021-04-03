@@ -8,7 +8,7 @@ import { typeDefs, resolvers } from "./schema";
 import { getUser } from "./users/users.utils";
 
 const PORT = process.env.PORT;
-const server = new ApolloServer({
+const apollo = new ApolloServer({
   typeDefs,
   resolvers,
   uploads: false,
@@ -23,8 +23,11 @@ app.use(
   logger("tiny"),
   graphqlUploadExpress("/graphql", { maxFileSize: 10000000, maxFiles: 10 })
 );
+//          URL                      폴더
+app.use("/uploads", express.static("uploads"));
 // apollo server에 app server를 middleware로써 줌
-server.applyMiddleware({ app, path: "/" });
+// app에서 추가 사용할 기능들을 넣은뒤에 server에 얹어야겠지.
+apollo.applyMiddleware({ app, path: "/" });
 app.listen({ port: PORT }, () => {
   console.log(`Server is RUNNING on http://localhost:${PORT}/`);
 });
