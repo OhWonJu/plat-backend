@@ -16,5 +16,10 @@ export default gql`
     point: Int!
     createdAt: String!
     updatedAt: String!
+    # computed Fiels
+    followersCount: Int!
+    followingsCount: Int!
+    isMe: Boolean!
+    isFollowing: Boolean!
   }
 `;

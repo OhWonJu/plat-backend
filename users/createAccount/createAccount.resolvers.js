@@ -34,7 +34,7 @@ export default {
 
         const newUser = await client.user.create({
           data: {
-            userName,
+            userName: userName.toLowerCase(),
             email,
             firstName,
             lastName,
