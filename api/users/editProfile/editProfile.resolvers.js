@@ -1,7 +1,7 @@
 import { createWriteStream } from "fs"; // nodejs 라이브러리 파일 pip관련
 import bcrypt from "bcrypt";
 
-import client from "../../client";
+import client from "../../../client";
 import { portectedResolver } from "../users.utils";
 
 const resolver = async (
@@ -48,7 +48,7 @@ const resolver = async (
       email,
       bio,
       ...(uglyPassword && { password: uglyPassword }), // ES6 문법.  ...(조건 && return Obj)
-      ...(profilePhotoUrl && {profilePhoto: profilePhotoUrl}),
+      ...(profilePhotoUrl && { profilePhoto: profilePhotoUrl }),
     },
   });
   if (updatedUser.id) {

@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 
-import client from "../../client";
+import client from "../../../client";
 
 export default {
   Mutation: {
@@ -41,10 +41,10 @@ export default {
             password: uglyPassword,
           },
         });
-        if(newUser.id) {
+        if (newUser.id) {
           return {
             ok: true,
-          }
+          };
         } else {
           return {
             ok: false,

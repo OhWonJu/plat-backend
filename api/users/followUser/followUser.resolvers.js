@@ -1,4 +1,4 @@
-import client from "../../client";
+import client from "../../../client";
 import { portectedResolver } from "../users.utils";
 
 const resolver = async (_, { userName }, { loggedInUser }) => {
@@ -15,7 +15,8 @@ const resolver = async (_, { userName }, { loggedInUser }) => {
     },
     data: {
       followings: {
-        disconnect: {
+        // connect는 unique 필드로만 연결 가능.
+        connect: {
           userName,
         },
       },
@@ -28,6 +29,6 @@ const resolver = async (_, { userName }, { loggedInUser }) => {
 
 export default {
   Mutation: {
-    unfollowUser: portectedResolver(resolver),
+    followUser: portectedResolver(resolver),
   },
 };

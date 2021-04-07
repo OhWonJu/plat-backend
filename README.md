@@ -1,4 +1,4 @@
-# Plat Backend
+# Plat Backend #
 
 ## User
 - [🟡] Create Account
@@ -12,14 +12,31 @@
 - [🟢] computed Fields
 - [🟢] Search Users
 
+
+## Groups
+-[🔴] Create Group (Parse Hashtag)
+-[🔴] See Hashtags
+-[🔴] Search Groups
+-[🔴] See Group Info
+-[🔴] Invite / Enter
+-[🔴] Edit Group setting
+-[🔴] Give grant / Take back grant
+-[🔴] See Group User with pagination
+-[🔴] Set User Avatar / Items
+-[🔴] Detect Users Position / Items Position
+
+
 ## Photos
-- [🔴] See Photo
 - [🔴] Upload Photo
+- [🔴] See Photo
+- [🔴] Search Photos
 - [🔴] Edit Photo
 - [🔴] Like / Unlike Photo
 - [🔴] See Photo Likes
-- [🔴] See Feed
-- [🔴] Search Photos
-- [🔴] See Hashtags
+- [🔴] See Feeds
+
 
 ## Comments
+-[🔴] Comment on Photo
+-[🔴] Edit Comment
+-[🔴] Delete Comment
