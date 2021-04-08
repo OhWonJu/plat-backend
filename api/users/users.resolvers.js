@@ -50,5 +50,7 @@ export default {
       });
       return Boolean(exists);
     },
+    groups: ({ id }) => client.user.findUnique({ where: { id } }).groups(),
+    feeds: ({ id }) => client.user.findUnique({ where: { id } }).feeds(),
   },
 };

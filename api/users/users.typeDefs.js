@@ -11,6 +11,8 @@ export default gql`
     loginSecret: String
     bio: String
     profilePhoto: String
+    groups: [Group!]
+    feeds: [Feed!]
     followers: [User!]
     followings: [User!]
     point: Int!

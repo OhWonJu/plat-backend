@@ -44,7 +44,7 @@ const resolver = async (
     data: {
       firstName,
       lastName,
-      userName: userName.toLowerCase(),
+      ...(userName && { userName: userName.toLowerCase() }),
       email,
       bio,
       ...(uglyPassword && { password: uglyPassword }), // ES6 문법.  ...(조건 && return Obj)

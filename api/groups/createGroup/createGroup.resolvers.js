@@ -1,11 +1,8 @@
 import client from "../../../client";
 import { portectedResolver } from "../../users/users.utils";
+import { processHashtags } from "../groups.utils";
 
-const resolver = async (
-  _,
-  { title, bio, open },
-  { loggedInUser }
-) => {
+const resolver = async (_, { title, bio, open }, { loggedInUser }) => {
   const existGroupTitle = await client.group.findFirst({
     where: {
       title,
@@ -17,17 +14,26 @@ const resolver = async (
       error: "This Group Title is already taken.",
     };
   }
+  let hashtagObjs = [];
   if (bio) {
-    // parse bio
-    // get or create Hashtags
+    hashtagObjs = processHashtags(bio);
   }
   const newGroup = await client.group.create({
     data: {
       adminId: loggedInUser.id,
       title: title.toLowerCase(),
       bio,
-      groupPhoto,
       open,
+      ...(hashtagObjs.length > 0 && {
+        hashtags: {
+          connectOrCreate: hashtagObjs,
+        },
+      }),
+      users: {
+        connect: {
+          id: loggedInUser.id,
+        },
+      },
     },
   });
   if (newGroup.id) {

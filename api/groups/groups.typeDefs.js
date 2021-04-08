@@ -3,23 +3,25 @@ import { gql } from "apollo-server-core";
 export default gql`
   type Group {
     id: String!
-    adminIn: String!
+    adminId: String!
     managerId: [String!]
     title: String!
     bio: String
     groupPhoto: String
     open: Boolean!
     code: [String!]
-    hashtag: [Hashtag!]
+    hashtags: [Hashtag!]
     users: [User!]
-    #feeds: [Feed!]
+    feeds: [Feed!]
     createdAt: String!
     updatedAt: String!
   }
   type Hashtag {
     id: String!
     hashtag: String!
-    groups: [Group!]
+    # 페이지네이션을 위한 args를 전달할 수 있도록?
+    groups(page: Int!): [Group!]
+    groupsCount: Int!
     createdAt: String!
     updatedAt: String!
   }
