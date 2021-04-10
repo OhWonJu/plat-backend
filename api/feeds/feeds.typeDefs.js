@@ -8,8 +8,15 @@ export default gql`
     file: String
     title: String!
     caption: String
+    likesCount: Int
     createdAt: String!
     updatedAt: String!
     # disappearTime: String!
+  }
+  type Like {
+    id: Int!
+    feed: Feed!
+    createdAt: String!
+    updatedAt: String!
   }
 `;

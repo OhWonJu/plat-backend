@@ -18,8 +18,8 @@
 - [🟡] See Group
 - [🟢] See Hashtags
 - [🟢] Search Groups
+- [🟢] Edit Group setting
 - [🔴] Invite / Enter
-- [🔴] Edit Group setting
 - [🔴] Give grant / Take back grant
 - [🔴] See Group User with pagination
 - [🔴] Set User Avatar / Items
@@ -30,10 +30,10 @@
 - [🟢] Upload Feed
 - [🟢] See Feed
 - [🟢] Search Feeds
-- [🔴] Edit Feed
-- [🔴] Like / Unlike Feed
-- [🔴] See Feed Likes
-- [🔴] See Feeds
+- [🟢] Edit Feed
+- [🟢] Like / Unlike Feed
+- [🟢] See Feed Likes
+- [🟢] See Group Feeds
 
 
 ## Comments

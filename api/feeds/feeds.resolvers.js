@@ -14,5 +14,6 @@ export default {
           id: groupId,
         },
       }),
+    likesCount: ({ id }) => client.like.count({ where: { feedId: id } }),
   },
 };
