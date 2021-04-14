@@ -8,12 +8,26 @@ export default {
           id: userId,
         },
       }),
-    group: ({ groupId }) =>
-      client.group.findUnique({
-        where: {
-          id: groupId,
-        },
-      }),
+    group: async ({ groupId }) => {
+      if (groupId) {
+        const groupInfo = await client.group.findUnique({
+          where: {
+            id: groupId,
+          },
+        });
+        return groupInfo;
+      } else {
+        return null;
+      }
+    },
     likesCount: ({ id }) => client.like.count({ where: { feedId: id } }),
+    commentsCount: ({ id }) => client.comment.count({ where: { feedId: id } }),
+    isMine: ({ userId }, _, { loggedInUser }) => {
+      if (!loggedInUser) {
+        return false;
+      } else {
+        return userId === loggedInUser.id;
+      }
+    },
   },
 };

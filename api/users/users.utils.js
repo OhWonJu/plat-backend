@@ -34,10 +34,15 @@ export const getUser = async token => {
 
 export const portectedResolver = gqlResolver => (root, args, context, info) => {
   if (!context.loggedInUser) {
-    return {
-      ok: false,
-      error: "Pleas log in to perform this action.",
-    };
+    const query = info.operation.operation === "query";
+    if (query) {
+      return null;
+    } else {
+      return {
+        ok: false,
+        error: "Please log in to perform this action.",
+      };
+    }
   }
   return gqlResolver(root, args, context, info);
 };

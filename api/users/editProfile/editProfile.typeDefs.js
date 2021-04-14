@@ -1,19 +1,15 @@
 import { gql } from "apollo-server-express";
 
 export default gql`
-  type EditProfileResult {
-    ok: Boolean!
-    error: String
-  }
   type Mutation {
     editProfile(
       firstName: String
       lastName: String
       userName: String
       email: String
-      password: String
+      # password: String
       bio: String
       profilePhoto: Upload
-    ): EditProfileResult!
+    ): MutationResponse!
   }
 `;

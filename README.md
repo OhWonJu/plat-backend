@@ -3,7 +3,8 @@
 ## User
 - [🟡] Create Account
 - [🟢] See Profile
-- [🟡] Login 
+- [🟢] Login with password
+- [🟢] Login with secret code
 - [🟡] Edit Profile
 - [🟢] Change Profile Photo (Image upload)
 - [🟢] Follow User
@@ -19,9 +20,9 @@
 - [🟢] See Hashtags
 - [🟢] Search Groups
 - [🟢] Edit Group setting
+- [🟢] Delet Group
 - [🔴] Invite / Enter
 - [🔴] Give grant / Take back grant
-- [🔴] See Group User with pagination
 - [🔴] Set User Avatar / Items
 - [🔴] Detect Users Position / Items Position
 
@@ -34,12 +35,14 @@
 - [🟢] Like / Unlike Feed
 - [🟢] See Feed Likes
 - [🟢] See Group Feeds
+- [🟢] See Feed Comments
+- [🟢] Delete Feed
 
 
 ## Comments
-- [🔴] Comment on Photo
-- [🔴] Edit Comment
-- [🔴] Delete Comment
+- [🟢] Comment on Feed
+- [🟢] Delete Comment
+- [🟢] Edit Comment
 
 ## Avatar
 

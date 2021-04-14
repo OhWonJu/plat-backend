@@ -4,11 +4,13 @@ export default gql`
   type Feed {
     id: String!
     user: User!
-    group: Group!
+    group: Group
     file: String
     title: String!
     caption: String
-    likesCount: Int
+    likesCount: Int!
+    commentsCount: Int!
+    isMine: Boolean!
     createdAt: String!
     updatedAt: String!
     # disappearTime: String!

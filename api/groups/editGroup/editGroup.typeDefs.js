@@ -1,11 +1,6 @@
 import { gql } from "apollo-server-core";
 
 export default gql`
-  type EditGroupResult {
-    ok: Boolean!
-    error: String
-  }
-
   type Mutation {
     editGroup(
       id: String!
@@ -13,6 +8,6 @@ export default gql`
       bio: String
       groupPhoto: String
       open: Boolean
-    ): EditGroupResult!
+    ): MutationResponse!
   }
 `;

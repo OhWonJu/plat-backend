@@ -1,7 +1,12 @@
 import client from "../../../client";
+import { uploadToS3 } from "../../shared/shared.utils";
 import { portectedResolver } from "../../users/users.utils";
 
-const resolver = async (_, { file, title, caption, groupId }, { loggedInUser }) => {
+const resolver = async (
+  _,
+  { file, title, caption, groupId },
+  { loggedInUser }
+) => {
   // AWS를 이용해 Upload 할 예정이라 일단은 그냥 String 데이터로 테스트
   const userInGroup = await client.user.findFirst({
     where: {
@@ -25,9 +30,13 @@ const resolver = async (_, { file, title, caption, groupId }, { loggedInUser }) 
       error: "Can't upload feed.",
     };
   }
+  let fileUrl = null;
+  if (file) {
+    fileUrl = await uploadToS3(file, loggedInUser.id, `${loggedInUser.id}/uploads`);
+  }
   const newFeed = client.feed.create({
     data: {
-      file,
+      ...(fileUrl && { file: fileUrl }),
       title,
       caption,
       user: {

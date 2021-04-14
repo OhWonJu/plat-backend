@@ -1,4 +1,4 @@
-export const processHashtags = (bio) => {
+export const processHashtags = bio => {
   // parse bio
   //                                       null이 들어왔을 때 빈 배열 반환
   const hashtags = bio.match(/#[\w]+/g) || [];
@@ -7,4 +7,8 @@ export const processHashtags = (bio) => {
     where: { hashtag },
     create: { hashtag },
   }));
-}
+};
+
+export const generateInviteCode = () =>
+  Math.random().toString(36).substr(2, 4).toUpperCase();
+

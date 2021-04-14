@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+//import bcrypt from "bcrypt";
 
 import client from "../../../client";
 
@@ -6,7 +6,7 @@ export default {
   Mutation: {
     createAccount: async (
       _,
-      { firstName, lastName, userName, email, password }
+      { firstName, lastName, userName, email }
     ) => {
       try {
         // 동일한 userName or email이 db에 있는지 확인
@@ -30,7 +30,7 @@ export default {
           throw new Error("this email is already taken.");
         }
         // hash password
-        const uglyPassword = await bcrypt.hash(password, 10);
+        //const uglyPassword = await bcrypt.hash(password, 10);
 
         const newUser = await client.user.create({
           data: {
@@ -38,7 +38,7 @@ export default {
             email,
             firstName,
             lastName,
-            password: uglyPassword,
+            //password: uglyPassword,
           },
         });
         if (newUser.id) {

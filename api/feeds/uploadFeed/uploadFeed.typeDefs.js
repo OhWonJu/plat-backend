@@ -9,7 +9,7 @@ export default gql`
   type Mutation {
     # 테스트를 위해 Upload가 아닌 String으로 실행
     uploadFeed(
-      file: String
+      file: Upload
       title: String!
       caption: String
       groupId: String!
