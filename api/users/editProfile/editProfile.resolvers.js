@@ -74,7 +74,6 @@ const resolver = async (
       };
     }
   }
-
   if (email) {
     const existingEmail = await client.user.findFirst({
       where: {
@@ -91,7 +90,6 @@ const resolver = async (
       };
     }
   }
-
   const updatedUser = await client.user.update({
     where: {
       id: loggedInUser.id,

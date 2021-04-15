@@ -36,7 +36,7 @@ const resolver = async (_, { id }, { loggedInUser }) => {
       },
     });
     // 해제된 해쉬 중 연결된 그룹이 하나도 없는 해쉬는 삭제
-    if (!hashIds.length.length !== 0) {
+    if (hashIds.length !== 0) {
       const noGroups = hashIds.filter(async hashId => {
         const hash = await client.hashtag.findFirst({
           where: { id: hashId.id },

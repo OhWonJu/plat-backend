@@ -23,12 +23,18 @@ export default {
           },
         },
       }),
+    codes: ({ id }) =>
+      client.code.findMany({
+        where: {
+          groupId: id,
+        },
+      }),
   },
   Hashtag: {
     // field에도 root, agrs, context를 전달 할 수 있다.
-    groups: ({ id }, { page }, {loggedInUser}) => {
+    groups: ({ id }, { page }, { loggedInUser }) => {
       // loggedInUser context를 불러옴으로써 부분적인 protect도 가능해짐
-      // seeHashtag는 public 이지만 그 속의 groupsCount는 non-public 
+      // seeHashtag는 public 이지만 그 속의 groupsCount는 non-public
 
       // pagination이 resolver가 아닌 field내에서 이루어진다.. field의 resolver화?
       return client.hashtag

@@ -9,7 +9,7 @@ export default gql`
     bio: String
     groupPhoto: String
     open: Boolean!
-    code: [String!]
+    codes: [Code!]
     hashtags: [Hashtag!]
     users: [User!]
     feeds: [Feed!]
@@ -22,6 +22,14 @@ export default gql`
     # 페이지네이션을 위한 args를 전달할 수 있도록?
     groups(page: Int!): [Group!]
     groupsCount: Int!
+    createdAt: String!
+    updatedAt: String!
+  }
+  type Code {
+    id: Int!
+    group: Group!
+    userId: String!
+    code: String!
     createdAt: String!
     updatedAt: String!
   }

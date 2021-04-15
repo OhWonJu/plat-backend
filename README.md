@@ -18,11 +18,13 @@
 - [🟢] Create Group (Parse Hashtag)
 - [🟡] See Group
 - [🟢] See Hashtags
-- [🟢] Search Groups
+- [🟢] Search Groups with keyword
 - [🟢] Edit Group setting
 - [🟢] Delet Group
-- [🔴] Invite / Enter
+- [🟢] Invite / Enter
+- [🔴] Quite Group
 - [🔴] Give grant / Take back grant
+- [🔴] Chagne admin
 - [🔴] Set User Avatar / Items
 - [🔴] Detect Users Position / Items Position
 

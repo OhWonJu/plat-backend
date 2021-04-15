@@ -16,6 +16,7 @@ const resolver = async (
     include: {
       hashtags: {
         select: {
+          id: true,
           hashtag: true,
         },
       },
@@ -27,6 +28,23 @@ const resolver = async (
       error: "You are not admin.",
     };
   }
+  const existingTitle = await client.group.findFirst({
+    where: {
+      title,
+    },
+    select: {
+      title: true,
+    },
+  });
+  if (existingTitle) {
+    return {
+      ok: false,
+      error: "This Title is already taken.",
+    };
+  }
+  const hashIds = group.hashtags.map(hash => ({
+    id: hash.id,
+  }));
   const group = await client.group.update({
     where: {
       id,
@@ -45,6 +63,20 @@ const resolver = async (
     },
   });
   if (group.id) {
+    if (hashIds.length !== 0) {
+      const noGroups = hashIds.filter(async hashId => {
+        const hash = await client.hashtag.findFirst({
+          where: { id: hashId.id },
+          select: { groups: { select: { id: true } } },
+        });
+        if (hash.group.length === 0) {
+          return hash;
+        } else {
+          return null;
+        }
+      });
+      await client.hashtag.deleteMany({ where: { OR: noGroups } });
+    }
     return {
       ok: true,
     };

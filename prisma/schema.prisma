@@ -23,7 +23,7 @@ model User {
   groups       Group[]
   feeds        Feed[]
   likes        Like[]
-  comments      Comment[]
+  comments     Comment[]
   followers    User[]    @relation("FollowRelation", references: [id])
   followings   User[]    @relation("FollowRelation", references: [id])
   point        Int       @default(0)
@@ -39,7 +39,7 @@ model Group {
   bio        String?
   groupPhoto String?
   open       Boolean
-  code       String[]
+  codes      Code[]
   hashtags   Hashtag[]
   users      User[]
   // userPositions UserPosition[]
@@ -61,6 +61,19 @@ model Hashtag {
   updatedAt DateTime @updatedAt
 }
 
+model Code {
+  id        Int      @id @default(autoincrement())
+  group     Group    @relation(fields: [groupId], references: [id])
+  groupId   String
+  userId    String
+  code      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  // 한 유저에 대해 여러번 초대코드를 보낼 수 없도록.
+
+  @@unique([groupId, userId])
+}
+
 model Feed {
   id        String    @id @default(uuid())
   // 실제 DB에 저장되지 않음 relatin으로 참조 하는거지.
@@ -74,7 +87,7 @@ model Feed {
   title     String
   caption   String?
   likes     Like[]
-  comments   Comment[]
+  comments  Comment[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   // disappearTime DateTime
