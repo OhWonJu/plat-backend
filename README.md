@@ -22,9 +22,9 @@
 - [🟢] Edit Group setting
 - [🟢] Delet Group
 - [🟢] Invite / Enter
-- [🔴] Quite Group
-- [🔴] Give grant / Take back grant
-- [🔴] Chagne admin
+- [🟢] Leave Group
+- [🟢] Give grant / Take back grant
+- [🟢] Change admin
 - [🔴] Set User Avatar / Items
 - [🔴] Detect Users Position / Items Position
 
@@ -45,6 +45,12 @@
 - [🟢] Comment on Feed
 - [🟢] Delete Comment
 - [🟢] Edit Comment
+
+## Direact Messages
+- [🔴] Create Room
+- [🔴] Get Room
+- [🔴] Send Message
+- [🔴] Realtime Message
 
 ## Avatar
 

@@ -27,6 +27,8 @@ model User {
   followers    User[]    @relation("FollowRelation", references: [id])
   followings   User[]    @relation("FollowRelation", references: [id])
   point        Int       @default(0)
+  items        Item[]
+  avatar       String
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 }
@@ -115,4 +117,39 @@ model Comment {
   payload   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model ItemInfo {
+  id        String   @id @default(uuid())
+  cost      Int
+  kategorie String
+  type      String
+  info      String?
+  file      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Item {
+  // itemInfo의 id 참조
+  itemCode  String
+  count     Int      @default(0)
+  User      User     @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([userId, itemCode])
+}
+
+model Avatar {
+  userId    String   @unique
+  skin      String?
+  head      String?
+  face      String?
+  body      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([userId, createdAt])
 }

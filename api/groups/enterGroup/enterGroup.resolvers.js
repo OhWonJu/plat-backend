@@ -4,7 +4,7 @@ import { portectedResolver } from "../../users/users.utils";
 const resolver = async (_, { groupId, code }, { loggedInUser }) => {
   const group = await client.group.findUnique({
     where: { id: groupId },
-    select: { id: true, open: true, codes: true },
+    select: { id: true, open: true, codes: true, users: true },
   });
   if (!group) {
     return {
@@ -30,6 +30,13 @@ const resolver = async (_, { groupId, code }, { loggedInUser }) => {
       ok: true,
     };
   } else {
+    const userExist = group.users.filter(user => user.id === loggedInUser.id);
+    if (userExist.length !== 0) {
+      return {
+        ok: false,
+        error: "You are already in this gorup.",
+      };
+    }
     // 그룹 코드 확인
     const userCode = group.codes.filter(c => c.code === code)[0];
     if (!userCode) {
