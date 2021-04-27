@@ -26,9 +26,12 @@ model User {
   comments     Comment[]
   followers    User[]    @relation("FollowRelation", references: [id])
   followings   User[]    @relation("FollowRelation", references: [id])
+  rooms        Room[]
+  messages     Message[]
   point        Int       @default(0)
   items        Item[]
-  avatar       String
+  // 개발을 위해 잠시 non required
+  avatar       String?
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 }
@@ -152,4 +155,24 @@ model Avatar {
   updatedAt DateTime @updatedAt
 
   @@id([userId, createdAt])
+}
+
+model Room {
+  id        String    @id @default(uuid())
+  users     User[]
+  messages  Message[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  payload   String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  room      Room     @relation(fields: [roomId], references: [id])
+  roomId    String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

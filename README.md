@@ -25,6 +25,7 @@
 - [🟢] Leave Group
 - [🟢] Give grant / Take back grant
 - [🟢] Change admin
+- [🔴] Subscription Feeds disappearTime
 - [🔴] Set User Avatar / Items
 - [🔴] Detect Users Position / Items Position
 
@@ -39,6 +40,8 @@
 - [🟢] See Group Feeds
 - [🟢] See Feed Comments
 - [🟢] Delete Feed
+- [🔴] Count likes with subscription and update disappearTime
+
 
 
 ## Comments
@@ -47,10 +50,12 @@
 - [🟢] Edit Comment
 
 ## Direact Messages
-- [🔴] Create Room
-- [🔴] Get Room
-- [🔴] Send Message
-- [🔴] Realtime Message
+- [🟢] See Rooms
+- [🟢] Send Message and createRoom
+- [🟢] See Room
+- [🟢] Computed Fields
+- [🟢] reed Message
+- [🟢] Realtime Message
 
 ## Avatar
 
