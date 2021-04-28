@@ -63,7 +63,10 @@ export default {
     roomUpdates: {
       // Subscription을 위해서는 subscribe 함수를 생성해야한다.
       // tirgger는 String type
+      // private 한 방식
       subscribe: resolver,
+      // public한 방식?
+      // subscribe: () => pubsub.asyncIterator(trigger Name)
     },
   },
 };

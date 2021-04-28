@@ -26,7 +26,7 @@
 - [🟢] Give grant / Take back grant
 - [🟢] Change admin
 - [🔴] Subscription Feeds disappearTime
-- [🔴] Set User Avatar / Items
+- [🔴] Set / Unset User Avatar / Items
 - [🔴] Detect Users Position / Items Position
 
 
@@ -43,11 +43,11 @@
 - [🔴] Count likes with subscription and update disappearTime
 
 
-
 ## Comments
 - [🟢] Comment on Feed
 - [🟢] Delete Comment
 - [🟢] Edit Comment
+
 
 ## Direact Messages
 - [🟢] See Rooms
@@ -57,8 +57,19 @@
 - [🟢] reed Message
 - [🟢] Realtime Message
 
+
 ## Avatar
+- [🔴] Create Avatar 
+- [🔴] Set / Unset Items
+
 
 ## Items
+- [🟢] Create Item info
+- [🟢] Buy Item
+- [🟢] Search Item
+- [🟢] See Item with type
+- [🟢] See Kategorie
+- [🟢] See item info 
+
 
 ## User and Item Positions

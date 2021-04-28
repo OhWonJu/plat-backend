@@ -13,6 +13,7 @@ export default gql`
     profilePhoto: String
     groups: [Group!]
     feeds: [Feed!]
+    items: [Item!]
     followers: [User!]
     followings: [User!]
     point: Int!

@@ -33,6 +33,7 @@ export default {
   Hashtag: {
     // field에도 root, agrs, context를 전달 할 수 있다.
     groups: ({ id }, { page }, { loggedInUser }) => {
+      console.log(id);
       // loggedInUser context를 불러옴으로써 부분적인 protect도 가능해짐
       // seeHashtag는 public 이지만 그 속의 groupsCount는 non-public
 
