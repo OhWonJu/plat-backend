@@ -26,6 +26,17 @@ const resolver = async (_, { groupId, code }, { loggedInUser }) => {
         },
       },
     });
+    await client.objectPosition.create({
+      data: {
+        objectId: loggedInUser.id,
+        type: "avatar",
+        group: {
+          connect: {
+            id: groupId,
+          },
+        },
+      },
+    });
     return {
       ok: true,
     };
@@ -46,7 +57,15 @@ const resolver = async (_, { groupId, code }, { loggedInUser }) => {
         error: "code is not exist.",
       };
     }
-    if (userCode.code === code && userCode.userId === loggedInUser.id) {
+    if ((userCode.code === code) && (userCode.userId === loggedInUser.id)) {
+      await client.code.delete({
+        where: {
+          groupId_userId: {
+            groupId: group.id,
+            userId: loggedInUser.id,
+          },
+        },
+      });
       await client.group.update({
         where: {
           id: groupId,
@@ -59,11 +78,14 @@ const resolver = async (_, { groupId, code }, { loggedInUser }) => {
           },
         },
       });
-      await client.code.delete({
-        where: {
-          groupId_userId: {
-            groupId: group.id,
-            userId: loggedInUser.id,
+      await client.objectPosition.create({
+        data: {
+          objectId: loggedInUser.id,
+          type: "avatar",
+          group: {
+            connect: {
+              id: groupId,
+            },
           },
         },
       });

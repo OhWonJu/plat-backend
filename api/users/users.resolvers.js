@@ -53,5 +53,6 @@ export default {
     groups: ({ id }) => client.user.findUnique({ where: { id } }).groups(),
     feeds: ({ id }) => client.user.findUnique({ where: { id } }).feeds(),
     items: ({ id }) => client.user.findUnique({ where: { id } }).items(),
+    avatar: ({ id }) => client.user.findUnique({ where: { id } }).avatar(),
   },
 };

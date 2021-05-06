@@ -1,9 +1,9 @@
 import client from "../../../client";
 import { portectedResolver } from "../../users/users.utils";
 
-const resolver = async (_, { itemId }, { loggedInUser }) => {
+const resolver = async (_, { itemInfoId }, { loggedInUser }) => {
   const existItem = await client.itemInfo.findUnique({
-    where: { id: itemId },
+    where: { id: itemInfoId },
     select: { id: true, cost: true },
   });
   if (!existItem) {
@@ -18,32 +18,47 @@ const resolver = async (_, { itemId }, { loggedInUser }) => {
       error: "Not enough points.",
     };
   }
-  const itemWhere = {
-    userId_itemId: {
+  const userHave = await client.item.findFirst({
+    where: {
       userId: loggedInUser.id,
-      itemId,
+      itemInfoId,
     },
-  };
-  const userHave = await client.item.findUnique({
-    where: itemWhere,
     select: {
+      id: true,
       count: true,
     },
   });
   if (userHave) {
-    const itemUpdate = await client.item.update({
-      where: itemWhere,
+    // const itemUpdate = await client.item.update({
+    //   where: userHave.id,
+    //   data: {
+    //     count: userHave.count + 1,
+    //   },
+    // });
+    const updateUser = await client.user.update({
+      where: {
+        id: loggedInUser.id,
+      },
       data: {
-        count: userHave.count + 1,
+        point: {
+          decrement: existItem.cost,
+        },
+        items: {
+          update: {
+            where: {
+              id: userHave.id,
+            },
+            data: {
+              //count: userHave.count + 1,
+              count: {
+                increment: 1,
+              },
+            },
+          },
+        },
       },
     });
-    const userUpdate = await client.user.update({
-      where: { id: loggedInUser.id },
-      data: {
-        point: loggedInUser.point - existItem.cost,
-      },
-    });
-    if (itemUpdate && userUpdate) {
+    if (updateUser) {
       return {
         ok: true,
       };
@@ -56,7 +71,7 @@ const resolver = async (_, { itemId }, { loggedInUser }) => {
   } else {
     await client.item.create({
       data: {
-        itemId,
+        itemInfoId,
         user: {
           connect: {
             id: loggedInUser.id,

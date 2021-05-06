@@ -26,9 +26,10 @@ export default gql`
     updatedAt: String!
   }
   type Item {
-    itemId: String!
+    id: String!
+    itemInfoId: String!
+    userId: String!
     count: Int!
-    # userId: String!
     createdAt: String!
     updatedAt: String!
   }

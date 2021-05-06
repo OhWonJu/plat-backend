@@ -1,11 +1,11 @@
 # Plat Backend #
 
 ## User
-- [🟡] Create Account
+- [🟢] Create Account
 - [🟢] See Profile
 - [🟢] Login with password
 - [🟢] Login with secret code
-- [🟡] Edit Profile
+- [🟢] Edit Profile
 - [🟢] Change Profile Photo (Image upload)
 - [🟢] Follow User
 - [🟢] Unfollow User
@@ -20,14 +20,14 @@
 - [🟢] See Hashtags
 - [🟢] Search Groups with keyword
 - [🟢] Edit Group setting
-- [🟢] Delet Group
-- [🟢] Invite / Enter
-- [🟢] Leave Group
+- [🟡] Delete Group - unconnect ... item count reset...
+- [🟢] Invite / Enter  - when enter avatar will be set in ObjectPositions
+- [🟡] Leave Group - unconnect ... item count reset...
 - [🟢] Give grant / Take back grant
 - [🟢] Change admin
-- [🔴] Subscription Feeds disappearTime
-- [🔴] Set / Unset User Avatar / Items
-- [🔴] Detect Users Position / Items Position
+- [🔴] Detect Feeds disappearTime / unconnect feed
+- [🟢] Set / Unset Items 
+- [🔴] Detect Objects Position
 
 
 ## Feeds
@@ -35,12 +35,13 @@
 - [🟢] See Feed
 - [🟢] Search Feeds
 - [🟢] Edit Feed
-- [🟢] Like / Unlike Feed
+- [🟢] Like / Unlike Feed and update disappearTime / user point
 - [🟢] See Feed Likes
 - [🟢] See Group Feeds
 - [🟢] See Feed Comments
 - [🟢] Delete Feed
-- [🔴] Count likes with subscription and update disappearTime
+- [🟢] update disappearTime and point
+- [🟡] Count likes with subscription 
 
 
 ## Comments
@@ -59,8 +60,9 @@
 
 
 ## Avatar
-- [🔴] Create Avatar 
-- [🔴] Set / Unset Items
+- [🟢] Create Avatar 
+- [🟢] See Avatar 
+- [🟢] Edit Avatar
 
 
 ## Items
@@ -71,5 +73,3 @@
 - [🟢] See Kategorie
 - [🟢] See item info 
 
-
-## User and Item Positions

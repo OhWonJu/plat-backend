@@ -13,7 +13,7 @@ export default gql`
     isMine: Boolean!
     createdAt: String!
     updatedAt: String!
-    # disappearTime: String!
+    disappearTime: String!
   }
   type Like {
     id: Int!

@@ -14,6 +14,7 @@ export default gql`
     groups: [Group!]
     feeds: [Feed!]
     items: [Item!]
+    avatar: Avatar
     followers: [User!]
     followings: [User!]
     point: Int!

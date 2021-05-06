@@ -33,4 +33,15 @@ export default gql`
     createdAt: String!
     updatedAt: String!
   }
+  type ObjectPosition {
+    id: Int!
+    # group: Group!
+    gorupId: String!
+    objectPosition: String!
+    type: String!
+    x: Int!
+    y: Int!
+    createdAt: String!
+    updatedAt: String!
+  }
 `;

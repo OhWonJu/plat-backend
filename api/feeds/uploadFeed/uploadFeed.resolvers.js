@@ -32,13 +32,19 @@ const resolver = async (
   }
   let fileUrl = null;
   if (file) {
-    fileUrl = await uploadToS3(file, loggedInUser.id, `${loggedInUser.id}/uploads`);
+    fileUrl = await uploadToS3(
+      file,
+      loggedInUser.id,
+      `${loggedInUser.id}/uploads`
+    );
   }
+  // console.log(new Date(1618412981731).toISOString());
   const newFeed = client.feed.create({
     data: {
       ...(fileUrl && { file: fileUrl }),
       title,
       caption,
+      disappearTime: new Date(Date.now() + 43200000), // default desapear time 12hour
       user: {
         connect: {
           id: loggedInUser.id,
