@@ -16,18 +16,18 @@
 
 ## Groups
 - [🟢] Create Group (Parse Hashtag)
-- [🟡] See Group
+- [🟢] See Group
 - [🟢] See Hashtags
 - [🟢] Search Groups with keyword
 - [🟢] Edit Group setting
-- [🟡] Delete Group - unconnect ... item count reset...
-- [🟢] Invite / Enter  - when enter avatar will be set in ObjectPositions
-- [🟡] Leave Group - unconnect ... item count reset...
+- [🟢] Delete Group 
+- [🟢] Invite / Enter  
+- [🟢] Leave Group 
 - [🟢] Give grant / Take back grant
 - [🟢] Change admin
-- [🔴] Detect Feeds disappearTime / unconnect feed
+- [🟢] Detect Feeds disappearTime / unconnect feed
 - [🟢] Set / Unset Items 
-- [🔴] Detect Objects Position
+- [🟢] Detect Objects Position
 
 
 ## Feeds
@@ -41,7 +41,6 @@
 - [🟢] See Feed Comments
 - [🟢] Delete Feed
 - [🟢] update disappearTime and point
-- [🟡] Count likes with subscription 
 
 
 ## Comments
@@ -73,3 +72,4 @@
 - [🟢] See Kategorie
 - [🟢] See item info 
 
+## FIX, TOTAL TEST 🔴

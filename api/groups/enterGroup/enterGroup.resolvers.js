@@ -29,6 +29,7 @@ const resolver = async (_, { groupId, code }, { loggedInUser }) => {
     await client.objectPosition.create({
       data: {
         objectId: loggedInUser.id,
+        owner: loggedInUser.id,
         type: "avatar",
         group: {
           connect: {
@@ -57,7 +58,7 @@ const resolver = async (_, { groupId, code }, { loggedInUser }) => {
         error: "code is not exist.",
       };
     }
-    if ((userCode.code === code) && (userCode.userId === loggedInUser.id)) {
+    if (userCode.code === code && userCode.userId === loggedInUser.id) {
       await client.code.delete({
         where: {
           groupId_userId: {
@@ -81,6 +82,7 @@ const resolver = async (_, { groupId, code }, { loggedInUser }) => {
       await client.objectPosition.create({
         data: {
           objectId: loggedInUser.id,
+          owner: loggedInUser.id,
           type: "avatar",
           group: {
             connect: {

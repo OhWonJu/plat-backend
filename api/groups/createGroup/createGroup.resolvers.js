@@ -39,6 +39,7 @@ const resolver = async (_, { title, bio, open }, { loggedInUser }) => {
   await client.objectPosition.create({
     data: {
       objectId: loggedInUser.id,
+      owner: loggedInUser.id,
       type: "avatar",
       group: {
         connect: {

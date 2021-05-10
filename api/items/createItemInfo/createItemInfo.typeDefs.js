@@ -7,7 +7,7 @@ export default gql`
       cost: Int!
       info: String
       # 테스트를 위해 String
-      file: String!
+      file: Upload
       typeId: String!
     ): MutationResponse!
   }

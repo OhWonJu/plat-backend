@@ -29,6 +29,22 @@ export default {
           groupId: id,
         },
       }),
+    items: ({ id }) =>
+      client.item.findMany({
+        where: {
+          groups: {
+            some: {
+              id,
+            },
+          },
+        },
+      }),
+    objectPositions: ({ id }) =>
+      client.objectPosition.findMany({
+        where: {
+          groupId: id,
+        },
+      }),
   },
   Hashtag: {
     // field에도 root, agrs, context를 전달 할 수 있다.

@@ -11,10 +11,10 @@ AWS.config.update({
 let S3 = new AWS.S3();
 
 // upload file functoin
-export const uploadToS3 = async (file, userId, folderName) => {
+export const uploadToS3 = async (file, id, folderName) => {
   const { filename, createReadStream } = await file;
   const readStream = createReadStream();
-  const objectName = `${folderName}/${userId}_${Date.now()}_${filename}`;
+  const objectName = `${folderName}/${id}_${Date.now()}_${filename}`;
   // AWS Upload nned bucket, fileName, and just send
   const upload = await new AWS.S3()
     .upload({

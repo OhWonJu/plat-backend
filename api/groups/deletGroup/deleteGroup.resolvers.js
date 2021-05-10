@@ -10,6 +10,7 @@ const resolver = async (_, { id }, { loggedInUser }) => {
       adminId: true,
       feeds: true,
       hashtags: true,
+      items: true,
     },
   });
   if (!group) {
@@ -26,10 +27,16 @@ const resolver = async (_, { id }, { loggedInUser }) => {
     const hashIds = group.hashtags.map(hash => ({
       id: hash.id,
     }));
+    const itemIds = group.items.map(item => ({
+      id: item.id,
+    }));
     // 그룹을 지우기 위해 해쉬 연결 해제
     await client.group.update({
       where: { id },
       data: {
+        items: {
+          disconnect: itemIds,
+        },
         hashtags: {
           disconnect: hashIds,
         },
@@ -84,6 +91,11 @@ const resolver = async (_, { id }, { loggedInUser }) => {
         },
       });
     }
+    await client.objectPosition.deleteMany({
+      where: {
+        groupId: id,
+      },
+    });
     await client.group.delete({
       where: {
         id,

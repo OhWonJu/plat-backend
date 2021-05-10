@@ -10,6 +10,7 @@ const resolver = async (_, { groupId }, { loggedInUser }) => {
       adminId: true,
       managerId: true,
       users: true,
+      items: true,
     },
   });
   if (!group) {
@@ -30,6 +31,20 @@ const resolver = async (_, { groupId }, { loggedInUser }) => {
       error: "Admin can't leave group.",
     };
   } else {
+    const itemsId = group.items.map(item => {
+      if (item.userId === loggedInUser.id) {
+        return {
+          id: item.id,
+        };
+      }
+    });
+    console.log(itemsId);
+    // 해당 group 내 user의 item 을 모두 소거
+    await client.objectPosition.deleteMany({
+      where: {
+        owner: loggedInUser.id,
+      },
+    });
     const isManager = group.managerId.findIndex(id => id === loggedInUser.id);
     if (isManager !== -1) {
       group.managerId.splice(isManager, 1);
@@ -44,6 +59,15 @@ const resolver = async (_, { groupId }, { loggedInUser }) => {
               id: loggedInUser.id,
             },
           },
+          items: {
+            disconnect: itemsId,
+          },
+          objectPositions: {
+            // avatar 제거
+            deleteMany: {
+              objectId: loggedInUser.id,
+            },
+          },
         },
       });
     } else {
@@ -55,6 +79,11 @@ const resolver = async (_, { groupId }, { loggedInUser }) => {
           users: {
             disconnect: {
               id: loggedInUser.id,
+            },
+          },
+          objectPositions: {
+            deleteMany: {
+              objectId: loggedInUser.id,
             },
           },
         },

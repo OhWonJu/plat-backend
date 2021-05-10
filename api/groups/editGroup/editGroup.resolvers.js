@@ -1,4 +1,5 @@
 import client from "../../../client";
+import { deleteInS3, uploadToS3 } from "../../shared/shared.utils";
 import { portectedResolver } from "../../users/users.utils";
 import { processHashtags } from "../groups.utils";
 
@@ -27,6 +28,17 @@ const resolver = async (
       ok: false,
       error: "You are not admin.",
     };
+  }
+  let groupPhotoUrl = null;
+  if (groupPhoto) {
+    if (oldGroupInfo.groupPhoto) {
+      await deleteInS3(oldGroupInfo.groupPhoto);
+    }
+    groupPhotoUrl = await uploadToS3(
+      groupPhoto,
+      oldGroupInfo.id,
+      `groups/${oldGroupInfo.id}/profile`
+    );
   }
   const existingTitle = await client.group.findFirst({
     where: {
@@ -58,7 +70,7 @@ const resolver = async (
           connectOrCreate: processHashtags(bio),
         },
       }),
-      ...(groupPhoto && { groupPhoto: groupPhoto }),
+      ...(groupPhoto && { groupPhoto: groupPhotoUrl }),
       open,
     },
   });

@@ -1,11 +1,17 @@
 import client from "../../../client";
+import { uploadToS3 } from "../../shared/shared.utils";
 
 export default {
   Mutation: {
     createItemInfo: async (_, { name, cost, info, file, typeId }) => {
       const existType = await client.type.findUnique({
-        where: { type: typeId },
-        select: { type: true },
+        where: {
+          type: typeId,
+        },
+        select: {
+          type: true,
+          kategorieId: true,
+        },
       });
       if (!existType) {
         return {
@@ -23,12 +29,20 @@ export default {
           error: "Item name is alreay used.",
         };
       }
+      let fileUrl = null;
+      if (file) {
+        fileUrl = await uploadToS3(
+          file,
+          typeId,
+          `items/${existItemInfo.kategorieId}/${typeId}`
+        );
+      }
       const newItemInfo = await client.itemInfo.create({
         data: {
           itemName: name,
           cost,
           info,
-          file,
+          ...(fileUrl && { file: fileUrl }),
           typeId,
         },
       });

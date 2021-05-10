@@ -51,7 +51,7 @@ const resolver = async (
     profilePhotoUrl = await uploadToS3(
       profilePhoto,
       loggedInUser.id,
-      `${loggedInUser.id}/profile`
+      `users/${loggedInUser.id}/profile`
     );
   }
   // let uglyPassword = null;

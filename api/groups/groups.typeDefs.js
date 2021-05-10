@@ -13,6 +13,8 @@ export default gql`
     hashtags: [Hashtag!]
     users: [User!]
     feeds: [Feed!]
+    items: [Item!]
+    objectPositions: [ObjectPosition!]
     createdAt: String!
     updatedAt: String!
   }
@@ -37,7 +39,8 @@ export default gql`
     id: Int!
     # group: Group!
     gorupId: String!
-    objectPosition: String!
+    objectId: String!
+    owner: String!
     type: String!
     x: Int!
     y: Int!

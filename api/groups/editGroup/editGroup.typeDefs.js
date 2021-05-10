@@ -6,7 +6,7 @@ export default gql`
       id: String!
       title: String
       bio: String
-      groupPhoto: String
+      groupPhoto: Upload
       open: Boolean
     ): MutationResponse!
   }
