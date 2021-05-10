@@ -16,7 +16,7 @@ model User {
   lastName     String?
   userName     String    @unique
   email        String    @unique
-  password     String
+  // password     String
   loginSecret  String?
   bio          String?
   profilePhoto String?
