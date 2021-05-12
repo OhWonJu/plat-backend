@@ -34,7 +34,7 @@ export default {
         fileUrl = await uploadToS3(
           file,
           typeId,
-          `items/${existItemInfo.kategorieId}/${typeId}`
+          `items/${existType.kategorieId}/${typeId}`
         );
       }
       const newItemInfo = await client.itemInfo.create({
