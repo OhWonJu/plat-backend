@@ -73,3 +73,4 @@
 - [🟢] See item info 
 
 ## FIX, TOTAL TEST 🔴
+- 사진 수정시 삭제 안됨..

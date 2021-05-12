@@ -36,7 +36,7 @@ export const deleteInS3 = async file => {
     "https://plat-uploads.s3.ap-northeast-2.amazonaws.com/",
     ""
   );
-  //console.log(Key);
+  console.log(Key);
   await S3.deleteObject({
     Bucket: "plat-uploads",
     Key,

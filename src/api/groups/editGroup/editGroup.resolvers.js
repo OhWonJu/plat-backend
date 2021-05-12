@@ -40,19 +40,21 @@ const resolver = async (
       `groups/${oldGroupInfo.id}/profile`
     );
   }
-  const existingTitle = await client.group.findFirst({
-    where: {
-      title,
-    },
-    select: {
-      title: true,
-    },
-  });
-  if (existingTitle) {
-    return {
-      ok: false,
-      error: "This Title is already taken.",
-    };
+  if (title) {
+    const existingTitle = await client.group.findFirst({
+      where: {
+        title,
+      },
+      select: {
+        title: true,
+      },
+    });
+    if (existingTitle) {
+      return {
+        ok: false,
+        error: "This Title is already taken.",
+      };
+    }
   }
   const hashIds = group.hashtags.map(hash => ({
     id: hash.id,
