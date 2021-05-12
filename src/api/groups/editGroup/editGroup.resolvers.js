@@ -56,7 +56,7 @@ const resolver = async (
       };
     }
   }
-  const hashIds = group.hashtags.map(hash => ({
+  const hashIds = oldGroupInfo.hashtags.map(hash => ({
     id: hash.id,
   }));
   const group = await client.group.update({
@@ -83,7 +83,7 @@ const resolver = async (
           where: { id: hashId.id },
           select: { groups: { select: { id: true } } },
         });
-        if (hash.group.length === 0) {
+        if (hash.groups.length === 0) {
           return hash;
         } else {
           return null;
