@@ -33,7 +33,7 @@ export default {
       if (file) {
         fileUrl = await uploadToS3(
           file,
-          typeId,
+          name,
           `items/${existType.kategorieId}/${typeId}`
         );
       }
