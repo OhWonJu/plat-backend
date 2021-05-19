@@ -7,7 +7,6 @@ import { graphqlUploadExpress } from "graphql-upload";
 
 import { typeDefs, resolvers } from "./schema";
 import { getUser } from "./api/users/users.utils";
-import { isPunctuatorTokenKind } from "graphql/language/lexer";
 
 const PORT = process.env.PORT;
 const apollo = new ApolloServer({

@@ -33,7 +33,7 @@ export const uploadToS3 = async (file, id, folderName) => {
 };
 
 export const deleteInS3 = async file => {
-  // console.log(file);
+  console.log(file);
   const Key = file.replace(
     "https://plat-uploads.s3.ap-northeast-2.amazonaws.com/",
     ""

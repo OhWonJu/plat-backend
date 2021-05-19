@@ -10,6 +10,7 @@ const resolver = async (_, { groupId }, { loggedInUser }) => {
       adminId: true,
       managerId: true,
       users: true,
+      feeds: true,
       items: true,
     },
   });
@@ -40,11 +41,19 @@ const resolver = async (_, { groupId }, { loggedInUser }) => {
     //     return null;
     //   }
     // });
-    const userItem = group.items.filter(item => item.userId === loggedInUser.id);
+    const userItem = group.items.filter(
+      item => item.userId === loggedInUser.id
+    );
     const itemIds = userItem.map(item => ({
       id: item.id,
     }));
-    console.log(itemIds);
+    const userFeed = group.feeds.filter(
+      feed => feed.userId === loggedInUser.id
+    );
+    console.log(userFeed);
+    const feedIds = userFeed.map(feed => ({
+      id: feed.id,
+    }));
     // 해당 group 내 user의 item 을 모두 소거
     await client.objectPosition.deleteMany({
       where: {
@@ -64,6 +73,9 @@ const resolver = async (_, { groupId }, { loggedInUser }) => {
             disconnect: {
               id: loggedInUser.id,
             },
+          },
+          feeds: {
+            disconnect: feedIds,
           },
           items: {
             disconnect: itemIds,
@@ -86,6 +98,9 @@ const resolver = async (_, { groupId }, { loggedInUser }) => {
             disconnect: {
               id: loggedInUser.id,
             },
+          },
+          feeds: {
+            disconnect: feedIds,
           },
           items: {
             disconnect: itemIds,
