@@ -72,10 +72,21 @@ const resolver = async (_, { itemInfoId }, { loggedInUser }) => {
     await client.item.create({
       data: {
         itemInfoId,
+        count: 1,
         user: {
           connect: {
             id: loggedInUser.id,
           },
+        },
+      },
+    });
+    await client.user.update({
+      where: {
+        id: loggedInUser.id,
+      },
+      data: {
+        point: {
+          decrement: existItem.cost,
         },
       },
     });

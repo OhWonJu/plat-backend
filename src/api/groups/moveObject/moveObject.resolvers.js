@@ -20,6 +20,7 @@ const resolver = async (
     },
     select: {
       objectPositions: true,
+      adminId: true,
     },
   });
   if (!group) {
@@ -66,7 +67,7 @@ const resolver = async (
         userId: true,
       },
     });
-    if (item.userId !== loggedInUser.id) {
+    if (item.userId !== loggedInUser.id && loggedInUser.id !== group.adminId) {
       return {
         ok: false,
         error: "It is not yours.",

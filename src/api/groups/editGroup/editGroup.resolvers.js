@@ -19,6 +19,7 @@ const resolver = async (
         select: {
           id: true,
           hashtag: true,
+          groups: true,
         },
       },
     },
@@ -68,7 +69,7 @@ const resolver = async (
       ...(bio && {
         bio: bio,
         hashtags: {
-          disconnect: oldGroupInfo.hashtags,
+          disconnect: hashIds,
           connectOrCreate: processHashtags(bio),
         },
       }),
@@ -78,13 +79,23 @@ const resolver = async (
   });
   if (group.id) {
     if (hashIds.length !== 0) {
-      const noGroups = hashIds.filter(async hashId => {
-        const hash = await client.hashtag.findFirst({
-          where: { id: hashId.id },
-          select: { groups: { select: { id: true } } },
-        });
+      const hashs = await Promise.all(
+        hashIds.map(
+          async hashId =>
+            await client.hashtag.findFirst({
+              where: { id: hashId.id },
+              select: {
+                groups: { select: { id: true } },
+              },
+            })
+        )
+      );
+      // filter callback안에서 await을 사용하면, callback은 항상 promise를 반환합니다. promise는 항상 'truthy'
+      // promise를 밖에서 해결..
+      const noGroups = hashIds.filter((hashId, index) => {
+        const hash = hashs[index];
         if (hash.groups.length === 0) {
-          return hash;
+          return hashId.id;
         } else {
           return null;
         }

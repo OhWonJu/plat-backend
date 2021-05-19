@@ -1,4 +1,5 @@
 import AWS from "aws-sdk";
+import { s3DeleteDir } from "@zvs001/s3-utils";
 
 // AWS Login
 AWS.config.update({
@@ -32,6 +33,7 @@ export const uploadToS3 = async (file, id, folderName) => {
 };
 
 export const deleteInS3 = async file => {
+  // console.log(file);
   const Key = file.replace(
     "https://plat-uploads.s3.ap-northeast-2.amazonaws.com/",
     ""
@@ -41,4 +43,16 @@ export const deleteInS3 = async file => {
     Bucket: "plat-uploads",
     Key,
   }).promise();
+};
+
+export const deleteDirInS3 = async dir => {
+  // console.log(dir);
+  const Key = dir.replace(
+    "https://plat-uploads.s3.ap-northeast-2.amazonaws.com/",
+    ""
+  );
+  await s3DeleteDir(S3, {
+    Bucket: "plat-uploads",
+    Prefix: Key,
+  });
 };

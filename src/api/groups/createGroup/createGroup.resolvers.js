@@ -34,6 +34,7 @@ const resolver = async (_, { title, bio, open }, { loggedInUser }) => {
           id: loggedInUser.id,
         },
       },
+      theme: "default_theme"
     },
   });
   await client.objectPosition.create({

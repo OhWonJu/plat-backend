@@ -31,14 +31,20 @@ const resolver = async (_, { groupId }, { loggedInUser }) => {
       error: "Admin can't leave group.",
     };
   } else {
-    const itemsId = group.items.map(item => {
-      if (item.userId === loggedInUser.id) {
-        return {
-          id: item.id,
-        };
-      }
-    });
-    console.log(itemsId);
+    // const itemsId = group.items.map(item => {
+    //   if (item.userId === loggedInUser.id) {
+    //     return {
+    //       id: item.id,
+    //     };
+    //   } else {
+    //     return null;
+    //   }
+    // });
+    const userItem = group.items.filter(item => item.userId === loggedInUser.id);
+    const itemIds = userItem.map(item => ({
+      id: item.id,
+    }));
+    console.log(itemIds);
     // 해당 group 내 user의 item 을 모두 소거
     await client.objectPosition.deleteMany({
       where: {
@@ -60,7 +66,7 @@ const resolver = async (_, { groupId }, { loggedInUser }) => {
             },
           },
           items: {
-            disconnect: itemsId,
+            disconnect: itemIds,
           },
           objectPositions: {
             // avatar 제거
@@ -80,6 +86,9 @@ const resolver = async (_, { groupId }, { loggedInUser }) => {
             disconnect: {
               id: loggedInUser.id,
             },
+          },
+          items: {
+            disconnect: itemIds,
           },
           objectPositions: {
             deleteMany: {

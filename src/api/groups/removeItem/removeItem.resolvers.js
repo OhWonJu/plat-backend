@@ -51,27 +51,10 @@ const resolver = async (_, { groupId, posId }, { loggedInUser }) => {
           id: item.id,
         },
         data: {
-          count: {
-            increment: 1,
-          },
           groups: {
             disconnect: {
               id: groupId,
             },
-          },
-        },
-      });
-      return {
-        ok: true,
-      };
-    } else {
-      await client.item.update({
-        where: {
-          id: item.id,
-        },
-        data: {
-          count: {
-            increment: 1,
           },
         },
       });

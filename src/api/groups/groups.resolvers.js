@@ -12,6 +12,10 @@ export default {
           },
         },
       }),
+    userCount: ({ id }) =>
+      client.user.count({
+        where: { groups: { some: { id } } },
+      }),
     //         root.id
     hashtags: ({ id }) =>
       client.hashtag.findMany({

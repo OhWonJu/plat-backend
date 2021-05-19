@@ -12,8 +12,10 @@ export default gql`
     codes: [Code!]
     hashtags: [Hashtag!]
     users: [User!]
+    userCount: Int!
     feeds: [Feed!]
     items: [Item!]
+    theme: String
     objectPositions: [ObjectPosition!]
     createdAt: String!
     updatedAt: String!

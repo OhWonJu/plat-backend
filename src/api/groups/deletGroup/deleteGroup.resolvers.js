@@ -1,4 +1,5 @@
 import client from "../../../client";
+import { deleteDirInS3 } from "../../shared/shared.utils";
 import { portectedResolver } from "../../users/users.utils";
 
 const resolver = async (_, { id }, { loggedInUser }) => {
@@ -7,10 +8,12 @@ const resolver = async (_, { id }, { loggedInUser }) => {
       id,
     },
     select: {
+      id: true,
       adminId: true,
       feeds: true,
       hashtags: true,
       items: true,
+      groupPhoto: true,
     },
   });
   if (!group) {
@@ -44,13 +47,21 @@ const resolver = async (_, { id }, { loggedInUser }) => {
     });
     // 해제된 해쉬 중 연결된 그룹이 하나도 없는 해쉬는 삭제
     if (hashIds.length !== 0) {
-      const noGroups = hashIds.filter(async hashId => {
-        const hash = await client.hashtag.findFirst({
-          where: { id: hashId.id },
-          select: { groups: { select: { id: true } } },
-        });
-        if (hash.group.length === 0) {
-          return hash;
+      const hashs = await Promise.all(
+        hashIds.map(
+          async hashId =>
+            await client.hashtag.findFirst({
+              where: { id: hashId.id },
+              select: {
+                groups: { select: { id: true } },
+              },
+            })
+        )
+      );
+      const noGroups = hashIds.filter((hashId, index) => {
+        const hash = hashs[index];
+        if (hash.groups.length === 0) {
+          return hashId.id;
         } else {
           return null;
         }
@@ -91,7 +102,19 @@ const resolver = async (_, { id }, { loggedInUser }) => {
         },
       });
     }
+    if (group.groupPhoto) {
+      // await deleteInS3("groups/95a36e8d-d9a5-4b7e-b627-64b38702fc78");
+      // https://plat-uploads.s3.ap-northeast-2.amazonaws.com/groups/97914a89-5aa5-4c9a-8f8a-ac724b2606f6/profile/97914a89-5aa5-4c9a-8f8a-ac724b2606f6_1621252718980_Untitled-series.png
+      await deleteDirInS3(
+        `https://plat-uploads.s3.ap-northeast-2.amazonaws.com/groups/${group.id}/`
+      );
+    }
     await client.objectPosition.deleteMany({
+      where: {
+        groupId: id,
+      },
+    });
+    await client.code.deleteMany({
       where: {
         groupId: id,
       },

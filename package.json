@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
-    "dev": "nodemon --exec babel-node src/server --delay2",
+    "dev": "nodemon --exec babel-node src/server",
     "migrate": "npx prisma migrate dev",
     "migrate-reset": "npx prisma migrate reset",
     "studio": "npx prisma studio",
@@ -25,6 +25,7 @@
   "dependencies": {
     "@babel/cli": "^7.13.16",
     "@prisma/client": "^2.19.0",
+    "@zvs001/s3-utils": "^0.1.0",
     "apollo-server": "^2.22.2",
     "apollo-server-express": "^2.22.2",
     "aws-sdk": "^2.884.0",
