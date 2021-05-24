@@ -4,10 +4,9 @@ export default gql`
   type Mutation {
     editAvatar(
       color: String
-      skinId: String
       headId: String
-      faceId: String
       bodyId: String
+      legId: String
     ): MutationResponse!
   }
 `;

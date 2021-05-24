@@ -179,14 +179,12 @@ model Avatar {
   user      User     @relation(fields: [userId], references: [id])
   userId    String   @unique
   color     String
-  skinUrl   String?
-  skinId    String?
   headUrl   String?
   headId    String?
-  faceUrl   String?
-  faceId    String?
   bodyUrl   String?
   bodyId    String?
+  legUrl   String?
+  legId    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

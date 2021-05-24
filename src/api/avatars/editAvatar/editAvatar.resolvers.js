@@ -4,7 +4,7 @@ import { portectedResolver } from "../../users/users.utils";
 
 const resolver = async (
   _,
-  { color, skinId, headId, faceId, bodyId },
+  { color, headId, bodyId, legId },
   { loggedInUser }
 ) => {
   const oldAvatar = await client.avatar.findFirst({
@@ -33,70 +33,6 @@ const resolver = async (
       .type();
     return itemType;
   };
-
-  let skinItem = null;
-  let skinUrl = null;
-  if (skinId) {
-    skinItem = await client.item.findUnique({
-      where: {
-        id: skinId,
-      },
-      select: {
-        id: true,
-        itemInfoId: true,
-        count: true,
-      },
-    });
-    const check = await checkType(skinItem);
-    if (check.kategorieId !== "avatar") {
-      return {
-        ok: false,
-        error: "Item kategorie is not for avatar.",
-      };
-    } else if (check.type !== "skin") {
-      return {
-        ok: false,
-        error: "It is not skin item.",
-      };
-    } else if (skinItem.count === 0) {
-      return {
-        ok: false,
-        error: "Not enough amount.",
-      };
-    } else {
-      skinUrl = await client.itemInfo.findUnique({
-        where: {
-          id: skinItem.itemInfoId,
-        },
-        select: {
-          id: true,
-          file: true,
-        },
-      });
-      if (oldAvatar.skinId) {
-        await client.item.update({
-          where: {
-            id: oldAvatar.skinId,
-          },
-          data: {
-            count: {
-              increment: 1,
-            },
-          },
-        });
-      }
-      await client.item.update({
-        where: {
-          id: faceItem.id,
-        },
-        data: {
-          count: {
-            decrement: 1,
-          },
-        },
-      });
-    }
-  }
 
   let headItem = null;
   let headUrl = null;
@@ -152,70 +88,6 @@ const resolver = async (
       await client.item.update({
         where: {
           id: headItem.id,
-        },
-        data: {
-          count: {
-            decrement: 1,
-          },
-        },
-      });
-    }
-  }
-
-  let faceItem = null;
-  let faceUrl = null;
-  if (faceId) {
-    faceItem = await client.item.findUnique({
-      where: {
-        id: faceId,
-      },
-      select: {
-        id: true,
-        itemInfoId: true,
-        count: true,
-      },
-    });
-    const check = await checkType(faceItem);
-    if (check.kategorieId !== "avatar") {
-      return {
-        ok: false,
-        error: "Item kategorie is not for avatar.",
-      };
-    } else if (check.type !== "face") {
-      return {
-        ok: false,
-        error: "It is not face item.",
-      };
-    } else if (faceItem.count === 0) {
-      return {
-        ok: false,
-        error: "Not enough amount.",
-      };
-    } else {
-      faceUrl = await client.itemInfo.findUnique({
-        where: {
-          id: faceItem.itemInfoId,
-        },
-        select: {
-          id: true,
-          file: true,
-        },
-      });
-      if (oldAvatar.facdId) {
-        await client.item.update({
-          where: {
-            id: oldAvatar.faceId,
-          },
-          data: {
-            count: {
-              increment: 1,
-            },
-          },
-        });
-      }
-      await client.item.update({
-        where: {
-          id: faceItem.id,
         },
         data: {
           count: {
@@ -290,20 +162,82 @@ const resolver = async (
     }
   }
 
+  let legItem = null;
+  let legUrl = null;
+  if (legId) {
+    legItem = await client.item.findUnique({
+      where: {
+        id: legId,
+      },
+      select: {
+        id: true,
+        itemInfoId: true,
+        count: true,
+      },
+    });
+    const check = await checkType(legItem);
+    if (check.kategorieId !== "avatar") {
+      return {
+        ok: false,
+        error: "Item kategorie is not for avatar.",
+      };
+    } else if (check.type !== "leg") {
+      return {
+        ok: false,
+        error: "It is not leg item.",
+      };
+    } else if (legItem.count === 0) {
+      return {
+        ok: false,
+        error: "Not enough amount.",
+      };
+    } else {
+      legUrl = await client.itemInfo.findUnique({
+        where: {
+          id: legItem.itemInfoId,
+        },
+        select: {
+          id: true,
+          file: true,
+        },
+      });
+      if (oldAvatar.skinId) {
+        await client.item.update({
+          where: {
+            id: oldAvatar.legId,
+          },
+          data: {
+            count: {
+              increment: 1,
+            },
+          },
+        });
+      }
+      await client.item.update({
+        where: {
+          id: legItem.id,
+        },
+        data: {
+          count: {
+            decrement: 1,
+          },
+        },
+      });
+    }
+  }
+
   await client.avatar.update({
     where: {
       userId: loggedInUser.id,
     },
     data: {
       ...(color && { color: color }),
-      ...(skinItem && { skinId: skinItem.id }),
-      ...(skinUrl && { skinUrl: skinUrl.file }),
       ...(headItem && { headId: headItem.id }),
       ...(headUrl && { headUrl: headUrl.file }),
-      ...(faceItem && { faceId: faceItem.id }),
-      ...(faceUrl && { faceUrl: faceUrl.file }),
       ...(bodyItem && { bodyId: bodyItem.id }),
       ...(bodyUrl && { bodyUrl: bodyUrl.file }),
+      ...(legItem && { legId: legItem.id }),
+      ...(legUrl && { legUrl: legUrl.file }),
     },
   });
   return {

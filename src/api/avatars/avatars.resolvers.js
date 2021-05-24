@@ -21,9 +21,8 @@ const seeItemInfo = async id => {
 
 export default {
   Avatar: {
-    skinInfo: avatar => seeItemInfo(avatar.skinId),
     headInfo: avatar => seeItemInfo(avatar.headId),
-    faceInfo: avatar => seeItemInfo(avatar.faceId),
     bodyInfo: avatar => seeItemInfo(avatar.bodyId),
+    legInfo: avatar => seeItemInfo(avatar.legId),
   },
 };
