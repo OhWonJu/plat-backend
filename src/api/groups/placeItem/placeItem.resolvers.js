@@ -1,11 +1,7 @@
 import client from "../../../client";
 import { portectedResolver } from "../../users/users.utils";
 
-const resolver = async (
-  _,
-  { groupId, itemId, xPos, yPos },
-  { loggedInUser }
-) => {
+const resolver = async (_, { groupId, itemId, grid }, { loggedInUser }) => {
   // 1. group 내 유저인지 확인한다.
   const group = await client.group.findFirst({
     where: {
@@ -61,7 +57,7 @@ const resolver = async (
       };
     }
     const exist = group.objectPositions.filter(oldItem => {
-      if (oldItem.x === xPos && oldItem.y === yPos) {
+      if (oldItem.grid === grid) {
         return oldItem;
       }
     });
@@ -98,8 +94,7 @@ const resolver = async (
             id: groupId,
           },
         },
-        x: xPos,
-        y: yPos,
+        grid,
       },
     });
     return {

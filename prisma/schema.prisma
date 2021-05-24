@@ -64,8 +64,9 @@ model ObjectPosition {
   objectId  String // avatar의 경우 user의 id
   owner     String // user
   type      String
-  x         Int      @default(-1)
-  y         Int      @default(-1)
+  //x         Int      @default(-1)
+  //y         Int      @default(-1)
+  grid      Int      @default(-1)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

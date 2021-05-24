@@ -5,7 +5,7 @@ import { portectedResolver } from "../../users/users.utils";
 
 const resolver = async (
   _,
-  { groupId, objId, xPos, yPos },
+  { groupId, objId, grid },
   { loggedInUser }
 ) => {
   // 1. 그룹 내 해당 포지션이 존재 여부 확인
@@ -47,7 +47,8 @@ const resolver = async (
   }
   // 3. 아이템 위치 변경, 단 해당 좌표에 이미 있으면 안됨.
   const exist = group.objectPositions.filter(oldItem => {
-    if (oldItem.x === xPos && oldItem.y === yPos) {
+    // if(oldItem.x === xPos && oldItem.y === yPos)
+    if (oldItem.grid === grid) {
       return oldItem;
     }
   });
@@ -87,8 +88,7 @@ const resolver = async (
       id: objId,
     },
     data: {
-      x: xPos,
-      y: yPos,
+      gird,
     },
   });
   pubsub.publish(DETECT_MOVE, { groupObjectUpdates: { ...movedObject } });

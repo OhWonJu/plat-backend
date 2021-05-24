@@ -44,8 +44,9 @@ export default gql`
     objectId: String!
     owner: String!
     type: String!
-    x: Int!
-    y: Int!
+    #x: Int!
+    #y: Int!
+    grid: Int!
     createdAt: String!
     updatedAt: String!
   }
