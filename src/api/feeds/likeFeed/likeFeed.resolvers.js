@@ -1,4 +1,6 @@
 import client from "../../../client";
+import { FEED_LIKE } from "../../../constents";
+import pubsub from "../../../pubsub";
 import { portectedResolver } from "../../users/users.utils";
 
 const resolver = async (_, { id }, { loggedInUser }) => {
@@ -37,7 +39,7 @@ const resolver = async (_, { id }, { loggedInUser }) => {
       error: "already liked",
     };
   } else {
-    await client.like.create({
+    const newLike = await client.like.create({
       data: {
         user: {
           connect: {
@@ -51,13 +53,19 @@ const resolver = async (_, { id }, { loggedInUser }) => {
         },
       },
     });
+    if (existFeed.user.id !== loggedInUser.id) {
+      console.log("user", existFeed.user.id);
+      console.log("you", loggedInUser.id);
+
+      pubsub.publish(FEED_LIKE, { likeUpdates: { ...newLike } });
+    }
     await client.feed.update({
       where: {
         id: existFeed.id,
       },
       data: {
         disappearTime: new Date(Date.parse(existFeed.disappearTime) + 600000), // 1 like = 10 min
-        // disappearTime: new Date(Date.parse(existFeed.disappearTime) + 30000), // test 
+        // disappearTime: new Date(Date.parse(existFeed.disappearTime) + 30000), // test
       },
     });
     await client.user.update({

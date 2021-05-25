@@ -72,4 +72,4 @@
 - [🟢] See Kategorie
 - [🟢] See item info 
 
-## FIX, TOTAL TEST 🔴
+## FIX, TOTAL TEST 😏      😥

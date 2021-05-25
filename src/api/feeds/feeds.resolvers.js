@@ -30,4 +30,17 @@ export default {
       }
     },
   },
+  Like: {
+    feed: ({ feedId }) =>
+      client.feed.findUnique({
+        where: {
+          id: feedId,
+        },
+        select: {
+          id: true,
+          title: true,
+          file: true,
+        },
+      }),
+  },
 };
