@@ -1,22 +1,22 @@
 import { withFilter } from "graphql-subscriptions";
 import client from "../../../client";
-import { FEED_LIKE } from "../../../constents";
+import { NEW_CODE } from "../../../constents";
 import pubsub from "../../../pubsub";
 
 const resolver = async (root, args, context, info) => {
   return withFilter(
-    () => pubsub.asyncIterator(FEED_LIKE),
+    () => pubsub.asyncIterator(NEW_CODE),
     async (payload, variables) => {
-      const feed = await client.feed.findFirst({
+      const code = await client.code.findFirst({
         where: {
-          id: payload.likeUpdates.feedId,
-          userId: variables.userId,
+          id: payload.inviteUpdates.id,
+          userId: context.loggedInUser.id,
         },
         select: {
           userId: true,
         },
       });
-      if (feed) {
+      if (code) {
         return true;
       } else {
         return false;
@@ -27,7 +27,7 @@ const resolver = async (root, args, context, info) => {
 
 export default {
   Subscription: {
-    likeUpdates: {
+    inviteUpdates: {
       subscribe: resolver,
     },
   },

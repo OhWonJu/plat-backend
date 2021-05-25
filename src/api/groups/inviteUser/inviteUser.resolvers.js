@@ -1,4 +1,6 @@
 import client from "../../../client";
+import { NEW_CODE } from "../../../constents";
+import pubsub from "../../../pubsub";
 import { portectedResolver } from "../../users/users.utils";
 import { generateInviteCode } from "../groups.utils";
 
@@ -74,7 +76,7 @@ const resolver = async (_, { groupId, userName }, { loggedInUser }) => {
         error: "Code is already generated.",
       };
     } else {
-      await client.code.create({
+      const code = await client.code.create({
         data: {
           code: inviteCode,
           userId: userExist.id,
@@ -85,6 +87,7 @@ const resolver = async (_, { groupId, userName }, { loggedInUser }) => {
           },
         },
       });
+      pubsub.publish(NEW_CODE, { inviteUpdates: { ...code } });
     }
     // DM 발송 필요...
     return {

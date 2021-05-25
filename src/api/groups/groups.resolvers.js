@@ -81,4 +81,16 @@ export default {
         },
       }),
   },
+  Code: {
+    group: ({ groupId }) =>
+      client.group.findFirst({
+        where: {
+          id: groupId,
+        },
+        select: {
+          id: true,
+          title: true,
+        },
+      }),
+  },
 };
