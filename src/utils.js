@@ -18,7 +18,7 @@ const sendMail = content => {
 // Mail의 몸통
 export const sendSecretMail = (email, secret) => {
   const content = {
-    from: "Zoody@plat.com",
+    from: "plat_zoody@plat.o-r.kr",
     to: email,
     subject: "Secret Code For Plat🔑",
     html: `Hello! Your Secret Code is "<strong>${secret}</strong>". <br/>
