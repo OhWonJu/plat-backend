@@ -4,10 +4,7 @@ import client from "../../../client";
 
 export default {
   Mutation: {
-    createAccount: async (
-      _,
-      { firstName, lastName, userName, email }
-    ) => {
+    createAccount: async (_, { firstName, lastName, userName, email }) => {
       try {
         // 동일한 userName or email이 db에 있는지 확인
         const existingUserName = await client.user.findFirst({
@@ -24,10 +21,18 @@ export default {
         });
         // 방어적 프로그래밍 위에서 내려오는 에러를 처리할거임
         if (existingUserName) {
-          throw new Error("This userName is already taken.");
+          return {
+            ok: false,
+            error: "This userName is already taken.",
+          };
+          // throw new Error("This userName is already taken.");
         }
         if (existingEmail) {
-          throw new Error("this email is already taken.");
+          return {
+            ok: false,
+            error: "this email is already taken.",
+          };
+          // throw new Error("this email is already taken.");
         }
         // hash password
         //const uglyPassword = await bcrypt.hash(password, 10);
