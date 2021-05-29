@@ -4,9 +4,9 @@ export default gql`
   type seeItemResult {
     itemId: String
     count: Int!
-    itmeInfo: ItemInfo
+    itemInfo: ItemInfo
   }
-  
+
   type Query {
     seeItem(id: String!): seeItemResult
   }
