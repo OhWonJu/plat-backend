@@ -183,8 +183,8 @@ model Avatar {
   headId    String?
   bodyUrl   String?
   bodyId    String?
-  legUrl   String?
-  legId    String?
+  legUrl    String?
+  legId     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

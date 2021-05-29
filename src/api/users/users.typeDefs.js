@@ -8,6 +8,7 @@ export default gql`
     userName: String!
     email: String!
     # password: String! grqphql에서는 password를 묻지 않을 것임.
+    # authCode: String
     loginSecret: String
     bio: String
     profilePhoto: String

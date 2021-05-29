@@ -26,3 +26,14 @@ export const sendSecretMail = (email, secret) => {
   };
   return sendMail(content);
 };
+
+export const sendAuthCodeMail = (email, authCode) => {
+  const content = {
+    from: "plat_zoody@plat.o-r.kr",
+    to: email,
+    subject: "Authentication Code for create new plat account😉",
+    html: `Hello! Your Authentication Code is "<strong>${authCode}</strong>". <br/>
+    Copy Paste on the APP for New Account!`,
+  };
+  return sendMail(content);
+};
