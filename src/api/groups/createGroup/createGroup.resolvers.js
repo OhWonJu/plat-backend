@@ -37,7 +37,7 @@ const resolver = async (_, { title, bio, open }, { loggedInUser }) => {
       groupPhoto:
         "https://plat-uploads.s3.ap-northeast-2.amazonaws.com/default/group/default_group_profile.png",
       theme:
-        "default_group_theme.png",
+        "default_group_theme",
     },
   });
   await client.objectPosition.create({
