@@ -2,7 +2,7 @@ import client from "../../../client";
 import { portectedResolver } from "../../users/users.utils";
 import { COLOR } from "../avatars.utils";
 
-const resolver = async (_, { color }, { loggedInUser }) => {
+const resolver = async (_, __, { loggedInUser }) => {
   const existAvatar = await client.avatar.findUnique({
     where: {
       userId: loggedInUser.id,
@@ -31,7 +31,12 @@ const resolver = async (_, { color }, { loggedInUser }) => {
             id: loggedInUser.id,
           },
         },
-        color: avatarColor,
+        bodyUrl:
+          "https://plat-uploads.s3.ap-northeast-2.amazonaws.com/default/avatar/default_avatar-body.png",
+        headUrl:
+          "https://plat-uploads.s3.ap-northeast-2.amazonaws.com/default/avatar/default_avatar_face.png",
+        legUrl:
+          "https://plat-uploads.s3.ap-northeast-2.amazonaws.com/default/avatar/default_avatar_leg_right.png",
       },
     });
     return {

@@ -34,7 +34,10 @@ const resolver = async (_, { title, bio, open }, { loggedInUser }) => {
           id: loggedInUser.id,
         },
       },
-      theme: "default_theme"
+      groupPhoto:
+        "https://plat-uploads.s3.ap-northeast-2.amazonaws.com/default/group/default_group_profile.png",
+      theme:
+        "https://plat-uploads.s3.ap-northeast-2.amazonaws.com/default/group/default_group_theme.png",
     },
   });
   await client.objectPosition.create({

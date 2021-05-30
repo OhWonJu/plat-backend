@@ -178,7 +178,6 @@ model Item {
 model Avatar {
   user      User     @relation(fields: [userId], references: [id])
   userId    String   @unique
-  color     String
   headUrl   String?
   headId    String?
   bodyUrl   String?

@@ -3,7 +3,6 @@ import { gql } from "apollo-server-core";
 export default gql`
   type Avatar {
     userId: String!
-    color: String!
     headUrl: String
     headId: String
     bodyUrl: String

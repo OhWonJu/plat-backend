@@ -43,6 +43,7 @@ export default {
             email,
             firstName,
             lastName,
+            profilePhoto: "https://plat-uploads.s3.ap-northeast-2.amazonaws.com/default/user/default_user_profile.png"
             //password: uglyPassword,
           },
         });
