@@ -2,7 +2,7 @@ import client from "../../../client";
 
 export default {
   Query: {
-    searchItemInfos: async (_, { keyword, lastId }) => {
+    searchItemInfos: async (_, { keyword }) => {
       if (keyword === "") {
         return;
       }
@@ -12,9 +12,6 @@ export default {
             contains: keyword.toLowerCase(),
           },
         },
-        take: 10,
-        skip: lastId ? 1 : 0,
-        ...(lastId && { cursor: { id: lastId } }),
       });
       return itemInfos;
     },
