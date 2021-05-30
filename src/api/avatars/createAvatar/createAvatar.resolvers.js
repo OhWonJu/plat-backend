@@ -24,12 +24,12 @@ const resolver = async (_, __, { loggedInUser }) => {
           id: loggedInUser.id,
         },
       },
-      bodyUrl:
-        "https://plat-uploads.s3.ap-northeast-2.amazonaws.com/default/avatar/default_avatar_body.png",
-      headUrl:
-        "https://plat-uploads.s3.ap-northeast-2.amazonaws.com/default/avatar/default_avatar_face.png",
-      legUrl:
-        "https://plat-uploads.s3.ap-northeast-2.amazonaws.com/default/avatar/default_avatar_leg_right.png",
+      bodyId:
+        "default_avatar_body.png",
+      headId:
+        "default_avatar_face.png",
+      legId:
+        "default_avatar_leg_right.png",
     },
   });
   return {
