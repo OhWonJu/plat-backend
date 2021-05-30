@@ -54,7 +54,7 @@ const resolver = async (_, { groupId, itemId }, { loggedInUser }) => {
         id: item.itemInfoId,
       },
       select: {
-        file: true,
+        id: true,
       },
     });
     await client.group.update({
@@ -62,7 +62,7 @@ const resolver = async (_, { groupId, itemId }, { loggedInUser }) => {
         id: groupId,
       },
       data: {
-        theme: themeInfo.file,
+        theme: themeInfo.id,
       },
     });
     await client.item.update({
