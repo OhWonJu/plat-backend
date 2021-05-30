@@ -2,7 +2,7 @@ import client from "../../client";
 
 export default {
   Type: {
-    itemInfos: ({ type }, { page }) => {
+    itemInfos: ({ type }, { lastId }) => {
       return client.type
         .findUnique({
           where: {
@@ -11,7 +11,8 @@ export default {
         })
         .itemInfos({
           take: 5,
-          skip: (page - 1) * 5,
+          skip: lastId ? 1 : 0,
+          ...(lastId && { cursor: { id: lastId } }),
         });
     },
     itemInfosCount: ({ type }) =>
