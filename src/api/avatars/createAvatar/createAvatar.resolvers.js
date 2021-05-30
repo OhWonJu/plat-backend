@@ -25,11 +25,11 @@ const resolver = async (_, __, { loggedInUser }) => {
         },
       },
       bodyId:
-        "default_avatar_body.png",
+        "default_avatar_body",
       headId:
-        "default_avatar_face.png",
+        "default_avatar_face",
       legId:
-        "default_avatar_leg_right.png",
+        "default_avatar_leg_right",
     },
   });
   return {
