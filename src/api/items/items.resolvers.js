@@ -10,7 +10,7 @@ export default {
           },
         })
         .itemInfos({
-          take: 5,
+          take: 6,
           skip: lastId ? 1 : 0,
           ...(lastId && { cursor: { id: lastId } }),
         });
