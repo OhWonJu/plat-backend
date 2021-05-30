@@ -25,7 +25,7 @@ const resolver = async (_, __, { loggedInUser }) => {
         },
       },
       bodyUrl:
-        "https://plat-uploads.s3.ap-northeast-2.amazonaws.com/default/avatar/default_avatar-body.png",
+        "https://plat-uploads.s3.ap-northeast-2.amazonaws.com/default/avatar/default_avatar_body.png",
       headUrl:
         "https://plat-uploads.s3.ap-northeast-2.amazonaws.com/default/avatar/default_avatar_face.png",
       legUrl:
