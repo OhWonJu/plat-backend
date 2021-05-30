@@ -4,7 +4,7 @@ import { portectedResolver } from "../../users/users.utils";
 
 const resolver = async (
   _,
-  { color, headId, bodyId, legId },
+  { headId, bodyId, legId },
   { loggedInUser }
 ) => {
   const oldAvatar = await client.avatar.findFirst({
@@ -231,7 +231,6 @@ const resolver = async (
       userId: loggedInUser.id,
     },
     data: {
-      ...(color && { color: color }),
       ...(headItem && { headId: headItem.id }),
       ...(headUrl && { headUrl: headUrl.file }),
       ...(bodyItem && { bodyId: bodyItem.id }),
