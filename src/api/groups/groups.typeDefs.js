@@ -24,8 +24,7 @@ export default gql`
     id: String!
     hashtag: String!
     # 페이지네이션을 위한 args를 전달할 수 있도록?
-    # groups(lastId: String): [Group!]
-    groups: [Group!]
+    groups(lastId: String): [Group!]
     groupsCount: Int!
     createdAt: String!
     updatedAt: String!

@@ -20,8 +20,8 @@ export default gql`
   type Type {
     type: String!
     kategorieId: String!
-    #itemInfos(lastId: String): [ItemInfo!]
-    itemInfos: [ItemInfo!] 
+    # itemInfos(lastId: String): [ItemInfo!]
+    itemInfos: [ItemInfo!]
     itemInfosCount: Int!
     createdAt: String!
     updatedAt: String!

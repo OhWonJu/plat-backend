@@ -9,7 +9,6 @@ export default gql`
 
   type Query {
     # 첫 page의 경우 cursor가 없을 수도 있으니 Not required
-    #seeFollowings(userName: String!, lastId: String): SeeFollowingsResult!
-    seeFollowings(userName: String!): SeeFollowingsResult!
+    seeFollowings(userName: String!, lastId: String): SeeFollowingsResult!
   }
 `;
