@@ -1,7 +1,7 @@
 import client from "../../../client";
 import { portectedResolver } from "../../users/users.utils";
 
-const resolver = async (_, { groupId, posId }, { loggedInUser }) => {
+const resolver = async (_, { groupId, grid }, { loggedInUser }) => {
   // 1. 해당 위치 item의 소유 여부를 확인 (혹은 어드민)
   const group = await client.group.findUnique({
     where: {
@@ -14,8 +14,8 @@ const resolver = async (_, { groupId, posId }, { loggedInUser }) => {
   });
   const objPos = await client.objectPosition.findFirst({
     where: {
-      id: posId,
       groupId: groupId,
+      grid,
     },
   });
   if (!objPos) {
