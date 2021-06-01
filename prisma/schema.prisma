@@ -62,7 +62,6 @@ model ObjectPosition {
   group      Group    @relation(fields: [groupId], references: [id])
   groupId    String
   objectId   String // avatar의 경우 user의 id
-  itemInfoId String
   owner      String // user
   type       String
   //x         Int      @default(-1)
