@@ -43,8 +43,8 @@ const resolver = async (
       ...(fileUrl && { file: fileUrl }),
       title,
       caption,
-      disappearTime: new Date(Date.now() + 43200000), // default desapear time 12hour
-      // disappearTime: new Date(Date.now() + 60000), // test
+      // disappearTime: new Date(Date.now() + 43200000), // default desapear time 12hour
+      disappearTime: new Date(Date.now() + 60000), // test
       user: {
         connect: {
           id: loggedInUser.id,

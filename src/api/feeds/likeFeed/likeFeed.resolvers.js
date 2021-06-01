@@ -64,8 +64,8 @@ const resolver = async (_, { id }, { loggedInUser }) => {
         id: existFeed.id,
       },
       data: {
-        disappearTime: new Date(Date.parse(existFeed.disappearTime) + 600000), // 1 like = 10 min
-        // disappearTime: new Date(Date.parse(existFeed.disappearTime) + 30000), // test
+        //disappearTime: new Date(Date.parse(existFeed.disappearTime) + 600000), // 1 like = 10 min
+        disappearTime: new Date(Date.parse(existFeed.disappearTime) + 30000), // test
       },
     });
     await client.user.update({
