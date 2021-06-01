@@ -10,7 +10,13 @@ export default {
         include: {
           //hashtags: true,
           //users: true,
-          feeds: true,
+          //feeds: true,
+          feeds: {
+            orderBy: {
+              createdAt: "desc",
+              updatedAt: "desc",
+            },
+          },
         },
       }),
   },
