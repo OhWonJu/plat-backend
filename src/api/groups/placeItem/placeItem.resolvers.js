@@ -87,7 +87,6 @@ const resolver = async (_, { groupId, itemId, grid }, { loggedInUser }) => {
     await client.objectPosition.create({
       data: {
         objectId: itemId,
-        itemInfoId: item.itemInfoId,
         owner: loggedInUser.id,
         type: "furniture",
         group: {
