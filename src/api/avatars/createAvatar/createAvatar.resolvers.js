@@ -29,7 +29,7 @@ const resolver = async (_, __, { loggedInUser }) => {
       headId:
         "default_avatar_face",
       legId:
-        "default_avatar_leg_right",
+        "default_avatar_leg",
     },
   });
   return {
