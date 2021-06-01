@@ -41,7 +41,7 @@ export default gql`
   type ObjectPosition {
     id: Int!
     # group: Group!
-    gorupId: String!
+    groupId: String!
     objectId: String!
     owner: String!
     type: String!
