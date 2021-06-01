@@ -12,10 +12,14 @@ export default {
           //users: true,
           //feeds: true,
           feeds: {
-            orderBy: {
-              createdAt: "desc",
-              updatedAt: "desc",
-            },
+            orderBy: [
+              {
+                createdAt: "desc",
+              },
+              {
+                updatedAt: "desc",
+              },
+            ],
           },
         },
       }),

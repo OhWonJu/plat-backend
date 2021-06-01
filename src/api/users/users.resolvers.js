@@ -51,7 +51,10 @@ export default {
       return Boolean(exists);
     },
     groups: ({ id }) => client.user.findUnique({ where: { id } }).groups(),
-    feeds: ({ id }) => client.user.findUnique({ where: { id } }).feeds(),
+    feeds: ({ id }) =>
+      client.user
+        .findUnique({ where: { id } })
+        .feeds({ orderBy: { createdAt: "desc" } }),
     items: ({ id }) => client.user.findUnique({ where: { id } }).items(),
     avatar: ({ id }) => client.user.findUnique({ where: { id } }).avatar(),
   },
