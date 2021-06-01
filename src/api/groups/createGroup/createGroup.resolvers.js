@@ -40,18 +40,18 @@ const resolver = async (_, { title, bio, open }, { loggedInUser }) => {
         "default_group_theme",
     },
   });
-  await client.objectPosition.create({
-    data: {
-      objectId: loggedInUser.id,
-      owner: loggedInUser.id,
-      type: "avatar",
-      group: {
-        connect: {
-          id: newGroup.id,
-        },
-      },
-    },
-  });
+  // await client.objectPosition.create({
+  //   data: {
+  //     objectId: loggedInUser.id,
+  //     owner: loggedInUser.id,
+  //     type: "avatar",
+  //     group: {
+  //       connect: {
+  //         id: newGroup.id,
+  //       },
+  //     },
+  //   },
+  // });
   if (newGroup.id) {
     return {
       ok: true,

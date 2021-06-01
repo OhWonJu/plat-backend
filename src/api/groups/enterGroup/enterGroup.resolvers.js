@@ -26,18 +26,18 @@ const resolver = async (_, { groupId, code }, { loggedInUser }) => {
         },
       },
     });
-    await client.objectPosition.create({
-      data: {
-        objectId: loggedInUser.id,
-        owner: loggedInUser.id,
-        type: "avatar",
-        group: {
-          connect: {
-            id: groupId,
-          },
-        },
-      },
-    });
+    // await client.objectPosition.create({
+    //   data: {
+    //     objectId: loggedInUser.id,
+    //     owner: loggedInUser.id,
+    //     type: "avatar",
+    //     group: {
+    //       connect: {
+    //         id: groupId,
+    //       },
+    //     },
+    //   },
+    // });
     return {
       ok: true,
     };
@@ -79,18 +79,18 @@ const resolver = async (_, { groupId, code }, { loggedInUser }) => {
           },
         },
       });
-      await client.objectPosition.create({
-        data: {
-          objectId: loggedInUser.id,
-          owner: loggedInUser.id,
-          type: "avatar",
-          group: {
-            connect: {
-              id: groupId,
-            },
-          },
-        },
-      });
+      // await client.objectPosition.create({
+      //   data: {
+      //     objectId: loggedInUser.id,
+      //     owner: loggedInUser.id,
+      //     type: "avatar",
+      //     group: {
+      //       connect: {
+      //         id: groupId,
+      //       },
+      //     },
+      //   },
+      // });
       return {
         ok: true,
       };

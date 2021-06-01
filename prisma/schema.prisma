@@ -58,17 +58,18 @@ model Group {
 }
 
 model ObjectPosition {
-  id        Int      @id @default(autoincrement())
-  group     Group    @relation(fields: [groupId], references: [id])
-  groupId   String
-  objectId  String // avatar의 경우 user의 id
-  owner     String // user
-  type      String
+  id         Int      @id @default(autoincrement())
+  group      Group    @relation(fields: [groupId], references: [id])
+  groupId    String
+  objectId   String // avatar의 경우 user의 id
+  itemInfoId String
+  owner      String // user
+  type       String
   //x         Int      @default(-1)
   //y         Int      @default(-1)
-  grid      Int      @default(-1)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  grid       Int      @default(-1)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model Hashtag {
