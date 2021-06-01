@@ -39,7 +39,7 @@ const resolver = async (_, { groupId, grid }, { loggedInUser }) => {
     // 2. 해당 위치의 item의 objectPosition을 제거
     await client.objectPosition.delete({
       where: {
-        id: posId,
+        id: objPos.id,
       },
     });
     const existObj = group.objectPositions.filter(
