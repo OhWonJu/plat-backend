@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE "Feed" ALTER COLUMN "groupId" DROP NOT NULL;
