@@ -14,11 +14,11 @@ export default {
           feeds: {
             orderBy: [
               {
-                createdAt: "desc",
+                createdAt: "asc",
               },
               {
-                updatedAt: "desc",
-              },
+                updatedAt: "asc",
+              },  
             ],
           },
         },
