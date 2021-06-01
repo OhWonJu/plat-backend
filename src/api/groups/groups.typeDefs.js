@@ -42,7 +42,7 @@ export default gql`
     id: Int!
     # group: Group!
     groupId: String!
-    objectId: String!
+    objectId: String
     itemInfoId: String!
     owner: String!
     type: String!
