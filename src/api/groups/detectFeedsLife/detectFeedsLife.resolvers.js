@@ -58,27 +58,25 @@ export default {
       const doomsDay = new Date(Date.parse(feed.disappearTime));
       const timer = doomsDay - now;
       if (timer < 0) {
-        return 
-        // return {
-        //   ok: false,
-        //   error: "Already this feed is doomed...",
-        // };
+        return {
+          ok: false,
+          error: "Already this feed is doomed...",
+        };
       } else {
         const result = await timeOut(feed.groupId, feedId, doomsDay, timer);
         console.log(result);
         //const result = new Promise(() => setTimeout(remove(feed.groupId, feedId, doomsDay), timer))
         if (!result) {
-          return 
-          // return {
-          //   ok: false,
-          //   error: "Not today...",
-          // };
+          return {
+            ok: false,
+            error: "Not today...",
+          };
         }
       }
       pubsub.publish(DETECT_TIME, { groupFeedUpdates: { ...feed } });
-      // return {
-      //   ok: true,
-      // };
+      return {
+        ok: true,
+      };
     },
   },
 };
