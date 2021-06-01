@@ -73,7 +73,7 @@ export default {
           };
         }
       }
-      pubsub.publish(DETECT_TIME, { groupFeedUpdates: { ...feed } });
+      //pubsub.publish(DETECT_TIME, { groupFeedUpdates: { ...feed } });
       return {
         ok: true,
       };
