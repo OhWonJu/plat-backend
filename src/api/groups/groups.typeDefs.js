@@ -48,6 +48,7 @@ export default gql`
     type: String!
     #x: Int!
     #y: Int!
+    # >>
     grid: Int!
     createdAt: String!
     updatedAt: String!
