@@ -11,6 +11,7 @@ export default gql`
     likesCount: Int!
     commentsCount: Int!
     isMine: Boolean!
+    isLiked: Boolean!
     createdAt: String!
     updatedAt: String!
     disappearTime: String!

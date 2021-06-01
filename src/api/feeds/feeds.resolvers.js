@@ -22,6 +22,19 @@ export default {
     },
     likesCount: ({ id }) => client.like.count({ where: { feedId: id } }),
     commentsCount: ({ id }) => client.comment.count({ where: { feedId: id } }),
+    isLiked: ({ id }, _, { loggedInUser }) => {
+      const myLike = client.like.findFirst({
+        where: {
+          feedId: id,
+          userId: loggedInUser.id,
+        },
+      });
+      if (myLike) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     isMine: ({ userId }, _, { loggedInUser }) => {
       if (!loggedInUser) {
         return false;
